@@ -1,0 +1,30 @@
+<fieldset class="fieldset-border">
+    <legend class="fieldset-border"><strong> Dados da Campanha</strong></legend>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="my-container row">
+                <div class="col-md-4">
+                    <span><strong>Nome:</strong> {{campanha?.nome}} </span>
+                </div>
+                <div class="col-md-4">
+                    <span class="mr-4"><strong>Objectivo:</strong> {{campanha?.objectivo}}
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <span class="mr-4"><strong>Orçamento:</strong>
+                        {{configService.numberFormat(campanha?.orcamento)}} (KZs)
+                    </span>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <span><strong>Data Inicio:</strong> {{campanha?.data_inicio |date:
+                        'YYYY-MM-dd '}}
+                    </span>
+                </div>
+                <div class="col-md-4 mt-4">
+                    <span><strong>Data Fim:</strong> {{campanha?.data_fim |date: 'YYYY-MM-dd '}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

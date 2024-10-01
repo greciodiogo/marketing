@@ -1,0 +1,111 @@
+<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalSegmentacao" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="max-width: 1722px">
+        <div class="modal-content {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-users nav-icon"></i> {{ title }}</h4>
+                <button class="close" type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" style="padding: 2rem;">
+                <ngx-loading [show]="this.campanhaService.loading"></ngx-loading>
+
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <app-dados-campanha [campanha]="campanha"></app-dados-campanha>
+                    </div>
+                    <div class="col-lg-12 col-12">
+                        <div class="modall modal-info fadee" data-backdrop="static">
+                            <div class="modal-dialog" style="max-width: 100%;margin-top:0">
+                                <div class="modal-content" style="box-shadow: 0 0 0rem rgba(0,0,0,.5);">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">SEGMENTAÇÃO</h4>
+                                        <div class="card-tools">
+                                            <button class="btn btn-outline-primary btn-sm btn-flat" type="button"
+                                                (click)="getCampanhaOnDb()">
+                                                <i class="icon-refresh"></i> Recarregar Dados
+                                            </button>
+
+                                            <button class="btn btn-outline-success btn-sm btn-flat" type="button"
+                                                data-toggle="modal"
+                                                (click)="this.addOrEditsegmentacaoComponent.setData(campanha)"
+                                                data-target="#modalAddOrEditSegmentacao">
+                                                <i class="icon-plus"></i> Criar Segmentação
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <!-- /.card-body -->
+
+                                        <app-loading [show]="this.campanhaService.loading"></app-loading>
+                                        <!-- Segmentação em Cards -->
+                                        <div class="col-lg-12 col-12">
+                                            <div class="d-flex flex-wrap justify-content-start">
+                                                <div class="atributos-container"
+                                                    *ngFor="let item of criteriosJsonList; let i = index">
+                                                    <div class="atributo-card">
+                                                        <!-- Exibe o ID da primeira província, se existir -->
+                                                        <p *ngIf="item?.provincias">
+                                                            <b>Provincia:</b> {{item?.provincias[0]?.nome}}
+                                                        </p>
+
+                                                        <!-- Exibe as idades máxima e mínima, se existirem -->
+                                                        <p *ngIf="item?.max"><b>Idade Máxima:</b>
+                                                            {{item?.max}}</p>
+                                                        <p *ngIf="item?.min"><b>Idade Mínima:</b>
+                                                            {{item?.min}}</p>
+
+                                                        <!-- Exibe gênero, se existir -->
+                                                        <p *ngIf="item?.genero">
+                                                            Gênero: {{item?.genero}}
+                                                        </p>
+
+                                                        <!-- Exibe valores máximos e mínimos, se existirem -->
+                                                        <p *ngIf="item?.maior || item?.menor">Valor em
+                                                            Compras</p>
+                                                        <p *ngIf="item?.maior">
+                                                            <b>Valor Máximo:</b>
+                                                            {{configService.numberFormat(item?.maior)}}
+                                                            (KZs)
+                                                        </p>
+                                                        <p *ngIf="item?.menor">
+                                                            <b>Valor Mínimo:</b>
+                                                            {{configService.numberFormat(item?.menor)}}
+                                                            (KZs)
+                                                        </p>
+
+                                                        <!-- Exibe direção, se existir -->
+                                                        <p *ngIf="item?.direcao">
+                                                            <b>Direcção:</b> {{item?.direcao}}
+                                                        </p>
+
+                                                        <!-- Exibe tipo de cliente, se existir -->
+                                                        <p *ngIf="item?.tipoCliente">
+                                                            <b>Tipo de cliente:</b> {{item?.tipoCliente}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-sm" type="button" (click)="onReset()"
+                    data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-add-or-editsegmentacao [is_modal]="true" (loadList)="getCampanhaOnDb()"></app-add-or-editsegmentacao>

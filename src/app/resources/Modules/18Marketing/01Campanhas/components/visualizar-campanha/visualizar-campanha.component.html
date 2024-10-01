@@ -1,0 +1,226 @@
+<app-aside-right [isOpen]="is_open" (close)="closeModalAside()"
+componentTitle="Visualizar Campanha"
+class="responsive-modal"
+>
+            <!-- Modal Header -->
+                <div class="modal-body" style="padding: 2rem;">
+                    <div class="selfcare_sidebar">
+                         <div class="nav nav-pills" style="margin-bottom: 40px;">
+
+                        <button *ngIf="campanha?.estadoInfo?.slug=='PENDENTE' || campanha?.estadoInfo?.slug=='REJEITADO' && this.campanhaService.canActivateRouterLink('marketing-validar-campanha')"                                        
+                            class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-toggle="modal"
+                            data-target="#modalValidarCampanhaCreateOrEdit"
+                            title="Validar Campanha" (click)="setCampanha(item)">
+                            <i class="fa fa-check"></i> Validar Campanha
+                         </button>
+
+                        <a href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Editar" data-toggle="modal"
+                            data-target="#modalAddOrEditSegmentacao"
+                            *ngIf="this.campanhaService.canActivateRouterLink('marketing-definir-publico-campanha')"
+                            (click)="this.addOrEditsegmentacaoComponent.setData(campanha)">
+                            <i class="fa fa-users"></i> Definir Público Alvo
+                        </a>
+                        <!-- <a *ngIf="campanha?.estadoInfo?.slug=='APROVADO' && !this.campanhaService.canActivateRouterLink('marketing-anular-campanha')"
+                            href="javascript:void(0)" class="nav-link"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Validar Campanha" (click)="setCampanha(campanha)">
+                            <i class="fa fa-ban"></i> Anular Aprovação
+                        </a> -->
+                        <a *ngIf="campanha?.estadoInfo?.slug=='APROVADO' || campanha?.estadoInfo?.slug=='DESPUBLICADO'  && this.campanhaService.canActivateRouterLink('marketing-publicar-campanha')"
+                            href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Publicar" (click)="publicar(campanha)">
+                            <i class="fa fa-paper-plane"></i> Publicar
+                        </a>
+                        <a *ngIf="campanha?.estadoInfo?.slug=='PUBLICADO' && this.campanhaService.canActivateRouterLink('marketing-despublicar-campanha')"
+                            href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Despublicar" (click)="despublicar(campanha)">
+                            <i class="fa fa-ban"></i> Despublicar
+                        </a>
+                        <a *ngIf="campanha?.estadoInfo?.slug=='PUBLICADO' && this.campanhaService.canActivateRouterLink('marketing-execucao-manual-campanha')"
+                            href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Publicar" (click)="execucaoManual(campanha)">
+                            <i class="fa fa-hand-pointer"></i> Execução Manual
+                        </a>
+                        <a *ngIf="campanha?.estadoInfo?.slug=='PUBLICADO' || campanha?.estadoInfo?.slug !='FECHADO' && this.campanhaService.canActivateRouterLink('marketing-regras-automacao-campanha')"
+                            href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            title="Regras automação" data-toggle="modal"
+                            data-target="#regrasAutomacaoModal"
+                            (click)="this.regrasAutomacaoComponent.SetCampanha(campanha)">
+                            <i class="fa fa-cogs"></i> Regras de Automação
+                        </a>
+                        <a *ngIf="campanha?.estadoInfo?.slug !=='FECHADO' && this.campanhaService.canActivateRouterLink('marketing-canais-distribuicao-campanha')" 
+                            href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
+                            data-toggle="tooltip" data-widget="chat-pane-toggle"
+                            data-toggle="modal" data-target="#modalCanaisDistribuicao"
+                            title="Canais de Distribuição"
+                            (click)="this.canaisDistribuicaoComponent.SetCampanha(campanha)">
+                            <i class="fa fa-share-alt"></i> Canais de Distribuição
+                        </a>                 
+                    </div> 
+                    </div>
+                    
+                    
+                    <fieldset class="fieldset-border">
+                        <legend class="fieldset-border"><strong> Dados da Campanha</strong></legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="my-container row first-fieldset">
+                                    <!-- <div class="col-md-7"></div> -->
+                                    <div class="row" style="margin-bottom: 20px">
+                                        <div class="col-md-6 mt-4">
+                                            <span><strong>Nome:</strong> {{campanha?.nome}}</span>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <span class="mr-4"><strong>Orçamento:</strong>
+                                                {{configService.numberFormat(campanha?.orcamento)}} (KZs)
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <span><strong>Data Prevista Inicio:</strong> {{campanha?.data_inicio |date:
+                                                'YYYY-MM-dd '}}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <span><strong>Data Prevista Fim:</strong> {{campanha?.data_fim |date: 'YYYY-MM-dd '}}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4 mt-4">
+                                            <span class="mr-4"><strong>Estado</strong></span>
+                                            <span [style.background-color]="campanha?.estadoInfo?.cor" type="button"
+                                                class="badge text-white"> {{
+                                                campanha?.estadoInfo?.nome || '-----'}}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-12 mt-4">
+                                            <span class="mr-4"><strong>Objectivo</strong></span>
+                                            <p class="mr-12 mt-2" >{{campanha?.objectivo}}</p>
+                                        </div>
+                                        <div class="col-md-12 mt-4">
+                                            <span class="mr-4"><strong>Descrição</strong></span>
+                                            <p class="mr-12 mt-2 descricao-text" >{{campanha?.descricao}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    
+                    <fieldset class="fieldset-border" *ngIf="campanha?.segmentacoes.length > 0">
+                        <legend class="fieldset-border"><strong> Detalhes do público Seleccionado</strong></legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="my-container row">
+                                    <div class="col-md-12">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="d-flex flex-wrap justify-content-start">
+                                                <div class="atributos-container"
+                                                    *ngFor="let item of criteriosJsonList; let i = index">
+                                                    <div class="atributo-card">
+                                                        <!-- Exibe o ID da primeira província, se existir -->
+                                                        <p *ngIf="item?.provincias">
+                                                            <b>Provincia:</b> {{item?.provincias[0]?.nome}}
+                                                        </p>
+
+                                                        <!-- Exibe as idades máxima e mínima, se existirem -->
+                                                        <p *ngIf="item?.max"><b>Idade Máxima:</b>
+                                                            {{item?.max}}</p>
+                                                        <p *ngIf="item?.min"><b>Idade Mínima:</b>
+                                                            {{item?.min}}</p>
+
+                                                        <!-- Exibe gênero, se existir -->
+                                                        <p *ngIf="item?.genero">
+                                                            Gênero: {{item?.genero}}
+                                                        </p>
+
+                                                        <!-- Exibe valores máximos e mínimos, se existirem -->
+                                                        <p *ngIf="item?.maior || item?.menor">Valor em
+                                                            Compras</p>
+                                                        <p *ngIf="item?.maior">
+                                                            <b>Valor Máximo:</b>
+                                                            {{configService.numberFormat(item?.maior)}}
+                                                            (KZs)
+                                                        </p>
+                                                        <p *ngIf="item?.menor">
+                                                            <b>Valor Mínimo:</b>
+                                                            {{configService.numberFormat(item?.menor)}}
+                                                            (KZs)
+                                                        </p>
+
+                                                        <!-- Exibe direção, se existir -->
+                                                        <p *ngIf="item?.direcao">
+                                                            <b>Direcção:</b> {{item?.direcao}}
+                                                        </p>
+
+                                                        <!-- Exibe tipo de cliente, se existir -->
+                                                        <p *ngIf="item?.tipoCliente">
+                                                            <b>Tipo de cliente:</b> {{item?.tipoCliente}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div style="display: flex; justify-content: space-between; gap: 10px">
+                        <fieldset class="fieldset-border" *ngIf="campanha?.canais.length > 0" style="width: 50%">
+                            <legend class="fieldset-border"><strong> Canais de Divulgação</strong></legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="my-container row">
+                                        <div class="col-md-12">
+                                            <p *ngFor="let item of campanha?.canais">{{item?.descricao}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset class="fieldset-border" *ngIf="campanha?.regrasAutomacao !=null" style="width: 50%;">
+                            <legend class="fieldset-border"><strong> Detalhes da Automação</strong></legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="my-container row">
+                                        <div class="col-md-12">
+                                            
+                                        <div class="col-md-12 mt-2">
+                                            <span><strong>Hora de Execução:</strong> {{campanha?.regrasAutomacao.hora_divulgacao}}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-12 mt-2" style="display:flex; align-items: flex-end;">
+                                            <span class="mr-4"><strong>Dias:</strong></span>
+                                            <button class="mr-12 mt-2 btn bg-navy btn-lg" *ngFor="let item of parseItem(campanha?.regrasAutomacao.dias)">{{item}}</button>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    </div>
+ 
+            </app-aside-right>
+
+<app-validar-campanha [is_modal]="true" (loadList)="getCampanhaOnDb()" 
+    [campanha]="campanha"></app-validar-campanha>
+
+<app-canair-distribuicao [is_modal]="true" (loadList)="getCampanhaOnDb()" >
+</app-canair-distribuicao>
+
+<app-regras-automacao [is_modal]="true" (loadList)="getCampanhaOnDb()" ></app-regras-automacao>
+
+<app-add-or-editsegmentacao [is_modal]="true" (loadList)="getCampanhaOnDb()"></app-add-or-editsegmentacao>

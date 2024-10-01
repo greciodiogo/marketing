@@ -1,0 +1,33 @@
+<div class="{{ (is_modal ? 'modal fade' : '') }}" id="regrasAutomacaoModal" data-backdrop="static">
+  <div class="modal-dialog modal-eb modal-dialog-right">
+    <div class="modal-content bg-dark text-light {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: rgb(35, 34, 34);">
+          <i class="fa fa-cogs nav-icon"></i> {{ title }}
+        </h4>
+        <button class="close" #closeModal type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Horário -->
+        <div class="d-flex justify-content-center align-items-center mb-3">
+          <input type="number" class="form-control text-center" style="width: 85px; height:95px ; font-size: 2rem;"
+            min="0" max="23" [(ngModel)]="hora">
+          <span class="mx-2" style="font-size: 2rem;">:</span>
+          <input type="number" class="form-control text-center" style="width: 85px; height:95px; font-size: 2rem;"
+            min="0" max="59" [(ngModel)]="minuto">
+        </div>
+
+        <!-- Dias da semana -->
+        <div class="btn-group mb-2">
+          <button *ngFor="let dia of diasSemana" (click)="toggleDia(dia)" class="btn btn-lg" style="font-size: 2em;"
+            [ngClass]="{'btn-outline-secondary': !dia.selected, 'btn-warning': dia.selected}">
+            {{ dia.nome }}
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-lg" (click)="onSubmit()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

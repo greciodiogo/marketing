@@ -1,0 +1,60 @@
+<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalValidarCampanhaCreateOrEdit" data-backdrop="static">
+    <div class="modal-dialog modal-eb modal-dialog-right">
+        <div class="modal-content {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+            <!-- Modal Header -->
+            <form [formGroup]="campanhaForm" (ngSubmit)="onSubmit()">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-check nav-icon"></i> {{ title }}</h4>
+                    <button class="close" #closeModal type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body" style="padding: 2rem;">
+                    <ngx-loading [show]="this.campanhaService.loading"></ngx-loading>
+                    <div class="row">
+                        <!-- Decisão -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="validacaoSlug">
+                                    Decisão</label>
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <select type="text" formControlName="validacaoSlug" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.validacaoSlug.errors, 'is-valid': f.validacaoSlug.touched && !f.validacaoSlug.errors }">
+                                    <option [ngValue]="null">Selecione a Decisão</option>
+                                    <option [value]="item?.slug" *ngFor="let item of decisoes">{{item?.nome}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f['validacaoSlug'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['validacaoSlug'].errors.required">O campo decisão é
+                                        obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="validacaoSlug">
+                                    Descrição</label>
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <textarea formControlName="descricao_validacao" class="form-control" placeholder="Escreva o motivo da decisão"
+                                    rows="2"
+                                    [ngClass]="{ 'is-invalid': submitted && f.descricao_validacao.errors, 'is-valid': f.descricao_validacao.touched && !f.descricao_validacao.errors }"></textarea>
+                                <div *ngIf="submitted && f['descricao_validacao'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['descricao_validacao'].errors.required">O campo Descrição é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-sm mr-1" type="submit"
+                        [disabled]="!campanhaForm.valid">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

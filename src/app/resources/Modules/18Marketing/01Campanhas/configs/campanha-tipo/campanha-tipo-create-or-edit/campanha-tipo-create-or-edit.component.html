@@ -1,0 +1,84 @@
++<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalRegistarTipoCampanha" data-backdrop="static">
+    <div class="modal-dialog modal-lg " style="max-width: 900px;">
+        <div class="modal-content {{ ( !is_modal? 'modal-content-notboxshadow' :'') }}">
+        <!-- Modal Header -->
+        <form [formGroup]="ngForm" (submit)="onSubmit();">
+          <div class="modal-header">
+            <h4 class="modal-title">{{ title }}</h4>
+            <button class="close" type="reset" (click)="onReset()" data-dismiss="modal">&times;</button>
+          </div>
+  
+          <!-- Modal body -->
+          <div class="modal-body" style="padding:10px 2rem;">
+            <ngx-loading [show]="tipoCampanhaService.loading"></ngx-loading>
+            <div class="row">
+  
+              <div class="col-md-6">
+                <div class="form-group has-warning">
+                  <label class="col-form-label" for="nome">Nome</label>&nbsp;
+                  <label style="color: #f44336" class="mr-2">*</label>
+                  <input class="form-control" required autofocus id="nome" type="text" formControlName="nome"
+                    placeholder="nome" autocomplete="given-name"
+                    [ngClass]="{ 'is-invalid': submitted && f.nome.errors, 'is-valid': f.nome.touched && !f.nome.errors }" />
+                  <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
+                    <div *ngIf="f['nome'].errors.required">O campo nome é obrigatório</div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-3">
+                <div class="form-group has-warning">
+                  <label class="col-form-label" for="slug">Sigla</label>&nbsp;
+                  <label style="color: #f44336" class="mr-2">*</label>
+                  <input class="form-control" required autofocus id="slug" type="text" formControlName="slug"
+                    placeholder="Sigla, é chave unica" autocomplete="given-name"
+                    [ngClass]="{ 'is-invalid': submitted && f.slug.errors, 'is-valid': f.slug.touched && !f.slug.errors }" />
+                  <div *ngIf="submitted && f['slug'].errors" class="invalid-feedback">
+                    <div *ngIf="f['slug'].errors.required">O campo Sigla é obrigatório</div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-0 col-xs-3 col-sm-3">
+                <label class="col-form-label" for="estado"> Estado</label>
+                <mat-radio-group style="height: 66px;" aria-label="Select an option" formControlName="is_actived" class="form-control" >
+                  <mat-radio-button value="1"> Activo</mat-radio-button><br/>
+                  <mat-radio-button value="0"> Inactivo</mat-radio-button>
+                </mat-radio-group>
+              </div>
+             <!--  <div class="col-md-3">
+                <div class="form-group has-warning">
+                  <label class="col-form-label" for="estado"> Estado</label>
+                  <div class="input-group mb-3">
+                    <select formControlName="estado" class="form-control" required autofocus
+                      [ngClass]="{ 'is-invalid': submitted && f.estado.errors, 'is-valid': f.estado.touched && !f.estado.errors }">
+                      <option [value]="null">Estado</option>
+                      <option value="1">Activo</option>
+                      <option value="0">Inestado</option>
+                    </select>
+                    <div *ngIf="submitted && f['estado'].errors" class="invalid-feedback">
+                      <div *ngIf="f['estado'].errors.required">O campo Estado é obrigatório</div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+  
+            </div>
+          </div>
+  
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button class="btn btn-danger btn-sm" type="reset" [disabled]="ngForm.pristine && !submitted"
+              (click)="onReset()">Limpar</button>
+            <button class="btn btn-success btn-sm mr-1" type="submit"
+              [disabled]="ngForm.valid">Validar</button>
+            <button class="btn btn-primary mr-1 btn-sm" type="submit"
+              [disabled]="ngForm.pristine || ngForm.invalid" data-style="expand-left"><i
+                class="fa fa-save"></i>
+              Registar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,184 @@
+<div class="row">
+
+    <div class="col-md-12 col-12">
+        <div class="modall modal-info fadee" data-backdrop="static">
+          <div class="modal-dialog" style="max-width: 100%;margin-top:0">
+            <div class="modal-content" style="box-shadow: 0 0 0rem rgba(0,0,0,.5);">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title"> Filtro de Dados</h4>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="row"> 
+                    <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                        <mat-label>Entrada</mat-label>
+                        <mat-select name="perPage"  [(ngModel)]="this.pagination.perPage"> 
+                            <mat-option [value]="5">5</mat-option>
+                            <mat-option [value]="10">10</mat-option>
+                            <mat-option [value]="25">25</mat-option> 
+                        </mat-select>
+                    </mat-form-field> 
+
+                      <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                        <mat-label>Ano</mat-label>
+                        <mat-select name="perPage"  [(ngModel)]="this.filter.ano">  
+                            <mat-option [value]="n" *ngFor="let n of anos">{{ n }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                      <mat-label>Mês</mat-label>
+                      <mat-select name="perPage"  [(ngModel)]="this.filter.mes">  
+                          <mat-option [value]="n.numero" *ngFor="let n of meses">{{ n.nome }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>  
+                    <div class="col-md-1 col-xs-2 col-sm-2">
+                        <mat-radio-group aria-label="Select an option" [(ngModel)]="this.filter.typeOrderBy"> 
+                            <mat-radio-button value="ASC" > Crescente</mat-radio-button><br>
+                            <mat-radio-button value="DESC" > Decrescente</mat-radio-button>
+                        </mat-radio-group> 
+                    </div> 
+  
+                    <div class="col-md-1 col-xs-2 col-sm-2">
+                        <div class="form-group">
+                            <div class="example-button-row">
+                            <button type="button" (click)="listarCharge()" mat-raised-button   class="btn btn-info btn-flat" type="button" style="margin-top: 3px;padding: 4px 16px;"><i
+                                class="fa fa-search"></i>
+                                Filtrar</button>
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                    </div> 
+      
+                </div>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-lg-12 col-12">
+        <div class="modall modal-info fadee" data-backdrop="static">
+          <div class="modal-dialog" style="max-width: 100%;">
+            <div class="modal-content" style="box-shadow: 0 0 0rem rgba(0,0,0,.5);">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">TABELA DE PRÉ FACTURAÇÃO</h4> 
+                <div class="card-tools">   
+                    <button class="btn btn-outline-primary btn-sm btn-flat" type="button" (click)="listarCharge()"><i class="icon-refresh"></i> Recarregar Dados</button> 
+                </div>
+              
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <!-- /.card-body --> 
+                <div class="table-responsivee"> 
+                  <table class="table table-hover table-bordered table-stripedd text-center m-0 table-valign-middle">
+                    <app-loading [show]="chargeService.loading"></app-loading>
+                     <tbody>
+                      <tr class="text-center" style="color: #fff;background:#00519f">
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Identificação</th>
+                        <th>Telefone</th>
+                        <th>Nº Acordo</th>  
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor Actual</th>
+                        <th>Periodo</th>                        
+                        <th>Estado</th> 
+                        <th style="width: 6%;">Acção</th>
+                      </tr>
+                    </tbody>
+                    <tbody>
+                      <tr
+                        *ngFor="let charge of charges | paginate: { itemsPerPage: this.pagination.perPage, currentPage: this.pagination.page, totalItems: this.pagination.total, id:'listCharge' }; index as i">
+                        <td>{{ charge.id }}</td>
+                        <td>{{charge.acordo.cliente.nome }}</td>
+                        <td width="200">{{ charge.acordo.cliente.identidade.numero_identidade}}</td>
+                        <td width="190">{{charge.acordo.cliente.telefone }}</td>
+                        <td class="text-center" width="190">{{charge.acordo.id }}</td>  
+                        <td style="width: 380px;" class="text-center"> {{ charge.produto.nome }}</td>
+                        <td style="width: 80px;" class="text-center"> {{ charge.quantidade }}</td>
+
+                        <td style="width: 210px; background: rgba(40, 167, 69, 0.22);" class="text-center">
+                          {{ configService.numberFormat(charge.valor) }}</td>
+                          <td class="text-center" width="190">{{charge.periodo }}</td> 
+                        <td width="190"> 
+                          <span class="btn bg-warning btn-block btn-flat" *ngIf="charge.is_facturado ==0">Não
+                            Facturado</span>
+                            <span class="btn bg-success btn-block btn-flat"
+                            *ngIf="charge.is_facturado ==1">Facturado</span>
+                            <span class="btn bg-danger btn-block btn-flat"
+                            *ngIf="charge.is_facturado == 2">Anulado</span>
+                        </td>
+                        
+                        
+                        <td> 
+                          <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-info btn-flat btn-sm btn-block"
+                              data-toggle="dropdown">Opções</button>
+                            <button type="button" class="btn btn-info btn-flat dropdown-toggle" data-toggle="dropdown"
+                              aria-expanded="false">
+                              <span class="caret"></span>
+                              <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu" x-placement="bottom-start"
+                              style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(67px, 38px, 0px);">
+
+                              <!--<a href="javascript:void(0)" class="dropdown-item btn-sm" 
+                                data-toggle="tooltip" data-widget="chat-pane-toggle" title="Editar" *ngIf="charge.is_facturado == 0"
+                                (click)="setCharge(charge)" data-toggle="modal"
+                                data-target="#myChargeUpdateModal"> <i class="fa fa-edit"></i> Ajustar Valor
+                              </a>
+
+                              <a href="javascript:void(0)" class="dropdown-item btn-sm" 
+                                data-toggle="tooltip" data-widget="chat-pane-toggle" title="Editar" *ngIf="charge.is_facturado == 0"
+                                (click)="setCharge(charge)" data-toggle="modal"
+                                data-target="#anularModal"> <i class="fa fa-adn"></i> Anular
+                              </a>
+
+                              <a href="javascript:void(0)" class="dropdown-item btn-sm" 
+                              data-toggle="tooltip" data-widget="chat-pane-toggle" title="Reverter Anulação" *ngIf="charge.is_facturado == 2"
+                              (click)="setCharge(charge);revert_anulacao();"> <i class="fa fa-undo"></i> Reverter Anulação
+                            </a>
+
+                              <a href="javascript:void(0)" class="dropdown-item btn-sm" 
+                              data-toggle="tooltip" data-widget="chat-pane-toggle" title="Ver Alterações"
+                              (click)="Detalhealteracoes(charge)" data-toggle="modal"
+                              data-target="#ModalAlteracao"> <i class="fa fa-eye"></i> Ver Alterações
+                              </a>-->
+                            </div>
+                          </div>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="row" style="width: 100%;">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info">Mostrando de {{this.pagination.page}} a
+                      {{this.pagination.perPage}} de
+                      {{configService.numberFormat(this.pagination.total)}} registo{{ ( this.pagination.total > 1? 's':'')}}
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-7">
+                    <div class="pull-right">
+                      <pagination-controls (pageChange)="getPageFilterData($event)" previousLabel="Anterior" maxSize="6"
+                        nextLabel="Próximo" directionLinks="true" responsive="true" id='listCharge'></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+ 

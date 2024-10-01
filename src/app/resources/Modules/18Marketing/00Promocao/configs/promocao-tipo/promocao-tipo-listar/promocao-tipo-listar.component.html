@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-md-8 col-xs-12 col-sm-12 offset-md-2">
+    <div class="invoice p-3 mb-3">
+      <div class="row">
+        <div class="col-md-7 col-xs-12 col-sm-12"><h4>Tipo Promoção</h4></div>
+        <div class="col-md-5 col-xs-12 col-sm-12">
+          <div class="card-tools" >
+            <button *ngIf="!this.tipoPromocaoService.canActivateRouterLink('registar-tipo-promocao')" style="float: right;" class="btn btn-outline-success btn-sm btn-flat" type="button" data-toggle="modal" data-target="#modalRegistarTipoIdentidade"><i class="icon-plus"></i> Registar</button>
+            <button style="float: right;" class="btn btn-outline-primary btn-sm btn-flat" type="button" (click)="listarTipoPromocao()"><i class="icon-refresh"></i> Recarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+          <div class="row">
+
+            <mat-form-field appearance="outline" class="example-full-width
+                col-md-2 col-xs-2 col-sm-2">
+                <mat-label>Entrada</mat-label>
+                <mat-select name="perPage"
+                  [(ngModel)]="this.pagination.perPage">
+                  <mat-option [value]="5">5</mat-option>
+                  <mat-option [value]="10">10</mat-option>
+                  <mat-option [value]="25">25</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="example-full-width
+                col-md-5 col-xs-2 col-sm-2">
+                <mat-label>Pesquisar pelo nome</mat-label>
+                <input matInput [(ngModel)]="this.filter.search"
+                  placeholder='Pesquisar pelo nome...'>
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="example-full-width
+                col-md-2 col-xs-2 col-sm-2">
+                <mat-label>Ordenar por</mat-label>
+                <mat-select name="orderBy" [(ngModel)]="this.filter.orderBy">
+                  <mat-option value="created_at">Data</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="col-md-1 col-xs-2 col-sm-2">
+                <mat-radio-group aria-label="Select an option"
+                  [(ngModel)]="this.filter.typeOrderBy">
+                  <mat-radio-button value="ASC"> Crescente</mat-radio-button><br>
+                  <mat-radio-button value="DESC"> Decrescente</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-md-1 col-xs-2 col-sm-2">
+                <div class="form-group">
+                  <div class="example-button-row">
+                    <button type="button"
+                      (click)="this.getPageFilterData($event)" mat-raised-button
+                      class="btn btn-info btn-flatt filter-color" type="button"
+                      style="margin-top: 3px;padding: 4px 16px;"><i
+                        class="fa fa-search"></i>
+                      Filtrar</button>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+              </div>
+            <br>
+            <div class="col-md-12 col-xs-12">
+
+              <app-loading [show]="this.tipoPromocaoService.loading"></app-loading>
+              <table class="table table-hoverr table-borderedd table-striped text-center cabecTableColor2">
+                <tbody >
+                  <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Slug</th>
+                    <th>Activo</th>
+                    <th>Registado Por</th>
+                    <th>Data Criação</th>
+                    <th style="width: 9%;">Acção</th>
+                  </tr>
+                  <tr
+                    *ngFor="let item of tipoPromocoes | paginate: { itemsPerPage:
+                      this.pagination.perPage, currentPage: this.pagination.page,
+                      id: 'listClients',totalItems: this.pagination.total }; index
+                      as i">
+                      <td>{{ (i+1) }}</td>
+                      <td>{{ item.nome }}</td>
+                      <td>{{ item.slug }}</td>
+                      <td>{{ (item.status == 1 ? 'Activo': 'Inactivo')  }}</td>
+                      <td>{{ item.user?.name  }}</td>
+                      <td>{{ item.created_at | date: 'dd-MM-yyyy' }}</td>
+                      <td style="width: 100px;"><button type="button" class="btn btn-sm bg-maroon btn-flat margin" title="Editar" (click)="this.tipoPromocaoFormCreateOrEditComponent.setTipoPromocao(item)"  data-widget="chat-pane-toggle" data-toggle="modal" data-target="#modalRegistarTipoIdentidade"><i class="fa fa-edit"></i> Editar</button></td>
+                     </tr>
+                </tbody>
+              </table>
+              <div class="row" style="width: 100%;">
+                <div class="col-sm-12 col-md-5">
+                  <div class="dataTables_info">Mostrar de
+                    {{this.pagination.page || 1}} a
+                    {{this.pagination.perPage}} de
+                    {{(this.pagination.total)}} registo{{ ( this.pagination.total
+                    > 1? 's':'')}}
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div class="pull-right">
+                    <pagination-controls (pageChange)="getPageFilterData($event)"
+                      previousLabel="Anterior" maxSize="6"
+                      nextLabel="Próximo" directionLinks="true" responsive="true"
+                      id='listClients'></pagination-controls>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<app-promocao-tipo-form-create-or-edit [is_modal]="true" (loadList)="listarTipoPromocao()" ></app-promocao-tipo-form-create-or-edit>

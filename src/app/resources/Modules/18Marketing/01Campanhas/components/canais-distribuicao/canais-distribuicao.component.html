@@ -1,0 +1,40 @@
+<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalCanaisDistribuicao" data-backdrop="static">
+    <div class="modal-dialog modal-eb modal-dialog-right">
+        <div class="modal-content bg-dark text-light {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+            <!-- Modal Header -->
+            <form [formGroup]="campanhaForm" (ngSubmit)="onSubmit()">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: rgb(35, 34, 34);"><i class="fa fa-bullhorn nav-icon"></i> {{ title }}</h4>
+                    <button class="close" #closeModal type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" style="padding: 2rem;">
+                    <ngx-loading [show]="this.campanhaService.loading"></ngx-loading>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div *ngFor="let canal of canaisDisponiveis; let i = index" class="form-check" style="margin-bottom: 10px;">
+                                    <input type="checkbox"
+                                           [formControl]="canaisFormArray.controls[i]"
+                                           [value]="canal.id"
+                                           (change)="onCheckboxChange($event)"
+                                           [checked]="canaisFormArray.controls[i].value === canal.id"
+                                           style="transform: scale(2); margin-right: 12px;">
+                                    <span style="font-size: 2em;">{{ canal.descricao }}</span>
+                                  </div>                                  
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-sm mr-1" type="submit"
+                        [disabled]="!campanhaForm.valid">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
