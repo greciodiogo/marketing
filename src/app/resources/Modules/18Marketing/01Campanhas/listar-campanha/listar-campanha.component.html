@@ -21,6 +21,16 @@
                                 </mat-select>
                             </mat-form-field>
 
+                            
+                            <mat-form-field appearance="outline" class="col-md-1 col-xs-2 col-sm-2">
+                                <mat-label>Estado</mat-label>
+                                <mat-select name="estado_ordem_servico_id" [(ngModel)]="this.tipo_estado_id">
+                                <mat-option value="null">Todos</mat-option>
+                                <mat-option *ngFor="let estado of estadosCampanha" [value]="estado.id">
+                                    {{estado.nome}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
                             <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
                                 <mat-label>Filtro</mat-label>
                                 <mat-select name="type_filter" [(ngModel)]="this.filter.typeFilter">
@@ -87,7 +97,7 @@
                         <!-- /.card-body -->
                         <div class="table-responsivee">
                             <app-loading [show]="this.campanhaService.loading"></app-loading>
-                            <table class="table table-hover table-bordered table-stripedd text-center m-0">
+                            <table class="table table-hover text-center m-0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
