@@ -12,6 +12,13 @@
                 <div class="modal-body" style="padding: 2rem;">
                     <ngx-loading [show]="this.segmentacaoService.loading"></ngx-loading>
                     <div class="row">
+                        <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+                            <mat-chip class="mat-chip-item" *ngFor="let criterio of selectForms.segmentacoes" selected>
+                              {{criterio.nome}}
+                            </mat-chip>
+                          </mat-chip-list>
+                    </div>
+                    <div class="row">
 
                         <!-- Província -->
                         <div class="col-md-3">
