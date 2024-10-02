@@ -3,13 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/security/guards/auth.guard';
 import { PermissionGuard } from '@core/security/guards/permission.guard';
 import { ListarCampanhaComponent } from './listar-campanha/listar-campanha.component';
-import { CampanhaTipoCreateOrEditComponent } from './configs/campanha-tipo/campanha-tipo-create-or-edit/campanha-tipo-create-or-edit.component';
+import { CampanhaTipoListarComponent } from './configs/campanha-tipo/campanha-tipo-listar/campanha-tipo-listar.component';
 
 const routes: Routes = [
   {
     path: 'listar',
     component: ListarCampanhaComponent,
-    canActivate: [AuthGuard],
     data: {
     //  expectedPermission: "listar-campanhas",
       title: "Campanhas",
@@ -21,8 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'configs/tipo-campanha/listar',
-    component: CampanhaTipoCreateOrEditComponent,
-    canActivate: [AuthGuard, PermissionGuard],
+    component: CampanhaTipoListarComponent,
     data: {
       expectedPermission: "listar-config-tipo-campanha",
       title: 'Tipo Campanha',
