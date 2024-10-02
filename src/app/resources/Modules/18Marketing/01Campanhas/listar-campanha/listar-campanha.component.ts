@@ -26,6 +26,8 @@ export class ListarCampanhaComponent implements OnInit {
 
   public pagination = new Pagination();
   public filter = new Filter()
+  public tipo_estado_id
+  public estadosCampanha
   @Input() campanhaForm: FormGroup;
 
 
@@ -49,7 +51,7 @@ export class ListarCampanhaComponent implements OnInit {
 
   constructor(
     public _route: Router,
-    public campanhaService: CampanhaService,
+    public campanhaService: CampanhaService,    
     public configService: FnService,
     public formService: FormService,
     private cdr: ChangeDetectorRef,
@@ -58,6 +60,7 @@ export class ListarCampanhaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTipoEstados()
     this.getCampanhas(),
     this.createForm()
     this.cdr.detectChanges();
@@ -81,6 +84,7 @@ export class ListarCampanhaComponent implements OnInit {
       .set("orderBy", this.filter.orderBy.toString())
       .set("typeOrderBy", this.filter.typeOrderBy.toString())
       .set("typeFilter", this.filter.typeFilter.toString())
+      .set('tipo_estado_id', this.tipo_estado_id?.toString())
       .set("isPaginate", "1");
     const search = this.filter.search;
 
@@ -122,6 +126,20 @@ export class ListarCampanhaComponent implements OnInit {
       }
     });
     return colecaoOrganizada || '---';
+  }
+
+ 
+  getTipoEstados() {
+    this.formService.getTiposPedido().subscribe(
+      (data) => {
+        this.estadosCampanha = data
+        this.estadosCampanha = data.filter((doc) => 
+          ["PENDENTE", "APROVADO","REJEITADO","PUBLICADO","DESPUBLICADO","FECHADO"].includes(doc.slug)
+        );
+      },
+      (error) => {
+        this.campanhaService.loading = false;
+      })
   }
 
   async apagarCampanha(item: any) {

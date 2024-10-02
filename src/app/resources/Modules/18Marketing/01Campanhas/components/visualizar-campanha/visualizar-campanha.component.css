@@ -17,12 +17,7 @@ legend.fieldset-border {
 
 /* Container para os atributos */
 .atributos-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px; /* Espaçamento entre os cards */
     padding: 10px;
-    max-width: 1450px; /* Ajuste conforme necessário */
-    margin: 0 auto; /* Centraliza o container */
 }
 
 /* Estilo para cada card de atributo */

@@ -35,7 +35,7 @@
 
         <!-- MARKETING -->
         <li class="nav-item has-treeview" routerLinkActive="menu-open"
-        >
+        > 
         <a href="#" class="nav-link" routerLinkActive="active">
           <i class="fa fa-bullhorn nav-icon"></i>
           <p>Marketing<i class="right fas fa-angle-left"></i></p>
@@ -43,12 +43,43 @@
         <ul class="nav nav-treeview">
           <li class="nav-item has-treeview" routerLinkActive="menu-open"
            >
-            <a routerLink="/marketing/campanhas/listar" routerLinkActive="active" class="nav-link">
+            <a href="javascript:void(0)" routerLinkActive="active" class="nav-link">
               <i class="fa fa-bullhorn nav-icon"></i>
               <p>
-                Gestão de Campanhas
+                Gestão de Campanhas <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" class="nav-item has-treeview"
+              routerLinkActive="menu-open">
+              <a routerLink="/marketing/campanhas/listar" routerLinkActive="active" class="nav-link">
+                <i class="fa fa-bullhorn nav-icon"></i>
+                <p>Consultar Campanhas</p>
+              </a>
+            </li>
+    
+            <li class="nav-item has-treeview" routerLinkActive="menu-open">
+              <a href="#" class="nav-link">
+                <i class="fa fa-cogs nav-icon"></i>
+                <p>
+                  Configs Campanhas
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">        
+                <li class="nav-item">
+                  <a routerLink="/marketing/campanhas/configs/tipo-campanha/listar" routerLinkActive="active"
+                    class="nav-link">
+                    <i class="fa fa-cog nav-icon"></i>
+                    <p>Tipo de Campanha</p>
+                  </a>
+                </li>
+            
+        
+              </ul>
+            </li>
+
+            </ul>
           </li>
 
 
@@ -57,7 +88,7 @@
         <li class="nav-item has-treeview"
         routerLinkActive="menu-open">
         <a href="javascript:void(0)" class="nav-link"><i class="far fa-folder nav-icon"></i>
-          <p>Promoção<i class="right fa fa-angle-left"></i></p>
+          <p>Gestão de Promoções<i class="right fa fa-angle-left"></i></p>
         </a>
         <ul class="nav nav-treeview">
 
@@ -96,48 +127,6 @@
 
 
         </ul>
-        <!-- <li class="nav-item has-treeview" routerLinkActive="menu-open"
-        *ngIf="!this.canActivateRouterLink('modulo-promocao')">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-folder"></i>
-          <p>Promoção<i class="right fas fa-angle-left"></i></p>
-        </a>
-          <ul class="nav nav-treeview">
-            <li *ngIf="!this.canActivateRouterLink('listar-promocao')" class="nav-item" class="nav-item has-treeview"
-              routerLinkActive="menu-open">
-              <a routerLink="/marketing/promocao/listar" routerLinkActive="active" class="nav-link">
-                <i class="fa fa-bullhorn nav-icon"></i>
-                <p>Consultar Promoção</p>
-              </a>
-            </li>
-
-            <li class="nav-item has-treeview" routerLinkActive="menu-open"
-                  *ngIf="!this.canActivateRouterLink('configs-promocao')">
-                  <a href="#" class="nav-link">
-                    <i class="fa fa-cogs nav-icon"></i>
-                    <p>
-                      Configs Promoção
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">        
-                    <li class="nav-item" *ngIf="
-                        !this.canActivateRouterLink('listar-config-tipo-promocao')
-                      ">
-                      <a routerLink="/marketing/promocao/configs/tipo-promocao/listar" routerLinkActive="active"
-                        class="nav-link">
-                        <i class="fa fa-cog nav-icon"></i>
-                        <p>Tipo de Promoção</p>
-                      </a>
-                    </li>
-                
-            
-                  </ul>
-                </li>
-          </ul>
-      </li> -->
-      <!-- END MARKETING -->
-
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

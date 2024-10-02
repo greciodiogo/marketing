@@ -9,9 +9,7 @@ const routes: Routes = [
   {
     path: 'listar',
     component: PromocaoListarComponent,
-    canActivate: [AuthGuard, PermissionGuard],
     data: {
-      expectedPermission: "listar-promocao",
       title: 'Promoção',
       layout: {
         customLayout: true,
@@ -24,9 +22,7 @@ const routes: Routes = [
   {
     path: 'configs/tipo-promocao/listar',
     component: TipoPromocaoListarComponent,
-    canActivate: [AuthGuard, PermissionGuard],
     data: {
-      expectedPermission: "listar-config-tipo-promocao",
       title: 'Promoção',
       layout: {
         customLayout: true,
