@@ -18,6 +18,7 @@ import { DadosCampanhaComponent } from './components/dados-campanha/dados-campan
 import { CampanhaTipoListarComponent } from './configs/campanha-tipo/campanha-tipo-listar/campanha-tipo-listar.component';
 import { CampanhaTipoCreateOrEditComponent } from './configs/campanha-tipo/campanha-tipo-create-or-edit/campanha-tipo-create-or-edit.component';
 import { VisualizarCampanhaComponent } from './components/visualizar-campanha/visualizar-campanha.component';
+import {MatChipsModule} from '@angular/material/chips';
 import { TruncatePipe } from './pipe/truncate'; // ajuste o caminho conforme necessário
 
 
@@ -39,6 +40,7 @@ import { TruncatePipe } from './pipe/truncate'; // ajuste o caminho conforme nec
   ],
   imports: [
     CommonModule,
+    MatChipsModule,
     SharedGlobalModule,
     SharedMaterialModule,
     ModalModule.forRoot(),
