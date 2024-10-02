@@ -30,7 +30,6 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
   @Input() title: string = 'Criar Segmentação';
   @Input() segmentacao: any;
   public pagination = new Pagination();
-  public segmentacoes: any[] = []
   public campanha: any
   @ViewChild('closeModal') closeModal: ElementRef;
 
@@ -50,6 +49,7 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
     municipios: [],
     tipoClientes: [],
     estadoCivils: [],
+    segmentacoes: [],
     direccaos: []
   };
 
@@ -71,6 +71,7 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
 
   ngOnInit() {
     this.getGeneros();
+    this.findSegmentacoes();
     this.getProvincesByPais(1);
     this.getTypesClientes();
     this.getAllDireccaos();
@@ -247,6 +248,12 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
     this.formService.getGeneros().subscribe((response) => {
       this.selectForms.generos = response;
       localStorage.setItem('generos', JSON.stringify(this.selectForms.generos))
+    });
+  }
+
+  public findSegmentacoes() {
+    this.formService.segmentacoes().subscribe((response) => {
+      this.selectForms.segmentacoes = response;
     });
   }
 

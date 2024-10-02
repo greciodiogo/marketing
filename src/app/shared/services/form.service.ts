@@ -201,6 +201,12 @@ export class FormService {
       .pipe(map((data) => Object(data).data));
   }
 
+  public segmentacoes(): Observable<any> {
+    return this.http
+      .get(`${this.route}/segmentacoes`)
+      .pipe(map((data) => Object(data).data));
+  }
+
   /**
    * @author 'matondo.quela@ideiasdinamicas.com'
    * @description 'getDebitoContaByClienteId'
