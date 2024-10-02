@@ -1,0 +1,357 @@
+<div
+  class="{{ is_modal ? 'modal fade' : '' }}"
+  id="modalPromocaoCreateOrEdit"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-xl" style="max-width: 2000px;">
+    <div
+      class="modal-content {{ !is_modal ? 'modal-content-notboxshadow' : '' }}"
+    >
+      <!-- Modal Header -->
+      <form [formGroup]="simpleFormPromocao" (submit)="onSubmit()">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-beer nav-icon"></i> {{ title }}
+          </h4>
+          <button
+            class="close"
+            #closeModal
+            type="reset"
+            (click)="onReset()"
+            data-dismiss="modal"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="padding: 2rem">
+          <app-loading [show]="this.promocaoService.loading"></app-loading>
+          
+            <div class="col-md-{{(desconto && tipoOperacao=='Editar')?'12':'8'}}">
+              
+            </div>
+    
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <fieldset class="fieldset-border" style="background: #fff;">
+                      <legend class="fieldset-border"><strong>Dados da Promoção</strong></legend>
+                      <div class="row">
+  
+                        <div class="col-md-6">
+                          <div class="form-group has-warning">
+                            <label class="col-form-label" for="nome">Nome da Promoção</label
+                            >&nbsp;
+                            <label style="color: #f44336" class="mr-2">*</label>
+                            <input
+                              class="form-control"
+                              autofocus
+                              id="nome"
+                              type="text"
+                              formControlName="nome"
+                              placeholder="nome da promoção"
+                              autocomplete="given-name"
+                              min="0"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.nome.errors,
+                                'is-valid': f.nome.touched && !f.nome.errors
+                              }"
+                            />
+                            <div
+                              *ngIf="submitted && f['nome'].errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f['nome'].errors.required">
+                                O campo Nome da Promoção é obrigatório
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+                        <div class="col-md-3">
+                          <div class="form-group has-warning">
+                            <label class="col-form-label" for="tipo_cliente_id"
+                              >Tipo de Cliente</label
+                            >
+                            &nbsp;
+                  <label style="color: #f44336" class="mr-2">*</label>
+                            <div class="input-group mb-3">
+                              <select
+                                formControlName="tipo_cliente_id"
+                                class="form-control"
+                                required
+                                autofocus
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.tipo_cliente_id.errors,
+                                  'is-valid':
+                                    f.tipo_cliente_id.touched && !f.tipo_cliente_id.errors
+                                }"
+                              >
+                                <option [value]="null">Selecione</option>
+                                <option
+                                  *ngFor="let i of selectForms.tipoClientes"
+                                  [value]="i.id"
+                                >
+                                  {{ i.nome }}
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="submitted && f['tipo_cliente_id'].errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f['tipo_cliente_id'].errors.required">
+                                  O campo Tipo Cliente é obrigatório
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+                        <div class="col-md-3">
+                          <div class="form-group has-warning">
+                            <label class="col-form-label" for="tipo_promocao_id"
+                              >Tipo de Promoção</label
+                            >
+                            &nbsp;
+                  <label style="color: #f44336" class="mr-2">*</label>
+                            <div class="input-group mb-3">
+                              <select
+                                formControlName="tipo_promocao_id"
+                                class="form-control"
+                                required
+                                autofocus
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.tipo_promocao_id.errors,
+                                  'is-valid':
+                                    f.tipo_promocao_id.touched && !f.tipo_promocao_id.errors
+                                }"
+                              >
+                                <option [value]="null">Selecione</option>
+                                <option
+                                  *ngFor="let i of selectForms.tipoPromocao"
+                                  [value]="i.id"
+                                >
+                                  {{ i.nome }}
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="submitted && f['tipo_promocao_id'].errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f['tipo_promocao_id'].errors.required">
+                                  O campo Tipo Conta é obrigatório
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+ 
+  
+  
+                  <div class="col-md-12">
+                    <fieldset class="fieldset-border" style="background: #fff;">
+                      <legend class="fieldset-border"><strong>Período da Promoção & Estado</strong></legend>
+                      <div class="row">
+                
+                        <div class="col-md-6">
+                          <div class="form-group has-warning">
+                              <label style="color: #f44336" class="mr-2">*</label>
+                              <label class="col-form-label" for="data_inicio">
+                                  Data Inicio</label>
+                              <div class="input-group mb-3">
+                                  <input type="date" formControlName="data_inicio" class="form-control"
+                                      autofocus [ngClass]="{
+                                          'is-invalid': submitted && f.data_inicio.errors,
+                                          'is-valid':
+                                          f.data_inicio.touched &&
+                                          !f.data_inicio.errors
+                                    }">
+  
+                                  <div *ngIf="submitted && f['data_inicio'].errors" class="invalid-feedback">
+                                      <div *ngIf="f['data_inicio'].errors.required">
+                                          O campo data inicio é obrigatório
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <div class="col-md-6">
+                          <div class="form-group has-warning">
+                              <label style="color: #f44336" class="mr-2">*</label>
+                              <label class="col-form-label" for="data_fim">
+                                  Data Fim</label>
+                              <div class="input-group mb-3">
+                                  <input type="date" formControlName="data_fim" class="form-control" autofocus
+                                      [ngClass]="{
+                                          'is-invalid': submitted && f.data_fim.errors,
+                                          'is-valid':
+                                          f.data_fim.touched &&
+                                          !f.data_fim.errors
+                                    }">
+  
+                                  <div *ngIf="submitted && f['data_fim'].errors" class="invalid-feedback">
+                                      <div *ngIf="f['data_fim'].errors.required">
+                                          O campo data fim é obrigatório
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  
+                       
+                      </div>
+                    </fieldset>
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-md-6">
+                 
+                <div class="col-md-12 {{(desconto && tipoOperacao=='Editar')?'d-none':'show'}}">
+                  <fieldset class="fieldset-border " style="background: #fff;">
+                    <legend class="fieldset-border"><strong>Grupo Produto</strong></legend>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group has-warning">
+                          <label class="col-form-label" for="produtoGrupo">Grupo Produtos</label>&nbsp;
+                          <label style="color: #f44336" class="mr-2">*</label>
+                          <div class="input-group">
+                            <select formControlName="produtoGrupo" class="form-control" required autofocus (change)="getProdutosByProdutoGrupoId($event)"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.produtoGrupo.errors,
+                                'is-valid': f.produtoGrupo.touched && !f.produtoGrupo.errors
+                              }">
+                              <option [value]="null">Selecione</option>
+                              <option
+                              *ngFor="let i of produtoGrupos"
+                              [value]="i.id"
+                            >
+                              {{ i.nome }}
+                            </option>
+                            </select>
+                            <div
+                              *ngIf="submitted && f['produtoGrupo'].errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f['produtoGrupo'].errors.required">
+                                O campo Grupo Produto é obrigatório
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                   
+                    </div>
+                  </fieldset>
+              </div>
+                <div class="col-md-12 {{(tipoOperacao=='Editar')?'d-none':'show'}}" >
+                  <app-backdrop-blur *ngIf="this.selectForms.produtos.length ==0"
+                  message="É Obrigatório selecionar o Grupo de Produtos.">
+                </app-backdrop-blur>
+                    <fieldset class="fieldset-border " style="background: #fff;">
+                      <legend class="fieldset-border"><strong>Produtos & Serviços</strong></legend>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="box box-solid">
+                          
+                            <!-- /.box-header -->
+                            <div class="box-body" style="padding: 20px 15px 0;border-bottom: 1px solid #eee;">
+                                <div style="height: 322px;overflow: auto;">
+                                  <table class="table table-bordered text-centerr table-striped table-hover cabecTableColor">
+                                    <thead>
+                                      <tr class="text-center">
+                                        <th class="table-header" style="width: 60px;"><input type="checkbox" style="margin-left:-18% !important;margin-top:-35% !important;" class="checkbox" (click)="manipularTodosCheckBoxes($event)"></th>
+                                        <th class="table-header" style="width: 281px;">Descrição</th>
+                                        <th class="table-header" style="width: 211px;">Definir Desconto%</th>
+                                        <th class="table-header" style="width: 211px;">Valor Promocional</th>
+                                        
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor=" let produto of selectForms.produtos">
+                                      <td class="text-center">
+                                         <input type="checkbox" (change)="manipularCheckedBox(produto,$event)" class="checkbox descontos checkbox{{produto.id}}" value="{{produto.id}}" />
+                                      </td>
+                                      <td style="font-size: 18px;">{{ produto?.nome }}</td>
+                                      <td>
+                                        <input
+                                            class="form-control inputDesconto inputDesconto{{produto.id}}"
+                                            id="desconto" [(ngModel)]="produto.desconto"
+                                            type="number"  (keyup)="this.getGruposChecked()"
+                                            name="desconto"
+                                            placeholder="Desconto%" [disabled]="true"
+                                            [ngModelOptions]="{standalone: true}"
+                                          />
+                                      </td>
+    
+                                      <td>
+                                        <input
+                                          class="form-control inputValorPromocional inputValorPromocional{{produto.id}}" 
+                                          id="valorPromocional" [(ngModel)]="produto.valorPromocional"
+                                          type="number" (keyup)="this.getGruposChecked()"
+                                          name="valorPromocional"
+                                          placeholder="Valor Promocional" [disabled]="true"
+                                          [ngModelOptions]="{standalone: true}"
+                                        />
+                                      </td>
+                                      
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              <!-- /.box-body -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                </div>
+    
+              </div>
+            </div>
+
+          
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            class="btn btn-danger btn-sm"
+            type="reset"
+            [disabled]="simpleFormPromocao.pristine && !submitted"
+            (click)="onReset()"
+          >
+            Limpar
+          </button>
+          <button
+            class="btn btn-success btn-sm mr-1"
+            type="submit"
+            [disabled]="simpleFormPromocao.valid"
+          >
+            Validar
+          </button>
+          <button
+            class="btn btn-primary mr-1 btn-sm"
+            type="submit"
+            [disabled]="simpleFormPromocao.invalid"
+            data-style="expand-left"
+          >
+          <!-- [disabled]="simpleFormPromocao.pristine || simpleFormPromocao.invalid" -->
+            <i class="fa fa-save"></i> Registar
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -1,0 +1,40 @@
+.modal-content {
+  background-color: #222; /* Fundo escuro para o modal */
+  color: #f5f5f5; /* Cor de texto claro */
+}
+
+.modal-header,
+.modal-footer {
+  border: none; /* Remove as bordas padrão do Bootstrap */
+}
+
+/* Estilo para aumentar o tamanho dos botões dos dias da semana */
+.modal .modal-body button.btn-lg {
+  padding: 15px 25px; /* Ajusta o preenchimento interno dos botões para maior tamanho */
+  font-size: 2rem; /* Aumenta o tamanho da fonte dos botões */
+  margin: 3px; /* Adiciona um pequeno espaçamento entre os botões */
+  border-radius: 0.25rem; /* Adiciona bordas arredondadas aos botões */
+}
+
+/* Estilo para ajustar o tamanho da modal */
+.modal-eb {
+  max-width: 1000px;
+}
+
+.modal .modal-body {
+  padding: 20px; /* Aumenta o preenchimento interno da modal para mais conforto */
+}
+
+/* Estilo para o grupo de botões */
+.modal .modal-body .btn-group {
+  gap: 10px; /* Aumenta o espaçamento entre os botões */
+  display: flex; /* Flex container para os botões */
+  flex-wrap: wrap; /* Permite que os botões quebrem linha */
+  justify-content: center; /* Alinha os botões no centro */
+}
+
+/* Ajusta o estilo dos inputs de hora e minuto */
+.modal .modal-body input[type="number"] {
+  font-size: 1.6rem; /* Aumenta o tamanho da fonte dos inputs */
+  padding: 10px; /* Aumenta o preenchimento interno dos inputs */
+}

@@ -1,0 +1,35 @@
+
+/* Container para os atributos */
+.atributos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px; /* Espaçamento entre os cards */
+    padding: 10px;
+    max-width: 1450px; /* Ajuste conforme necessário */
+    margin: 0 auto; /* Centraliza o container */
+}
+
+/* Estilo para cada card de atributo */
+.atributo-card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+/* Efeito de destaque ao passar o cursor */
+.atributo-card:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para o texto dentro do card */
+.atributo-card p {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}

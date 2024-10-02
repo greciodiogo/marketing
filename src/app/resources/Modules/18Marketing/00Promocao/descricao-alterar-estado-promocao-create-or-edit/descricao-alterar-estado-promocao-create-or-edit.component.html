@@ -1,0 +1,146 @@
+<div
+  class="{{ is_modal ? 'modal fade' : '' }}"
+  id="modalDescricaoAlterarEstadoPromocao"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-xl">
+    <div
+      class="modal-content {{ !is_modal ? 'modal-content-notboxshadow' : '' }}"
+    >
+      <!-- Modal Header -->
+      <form [formGroup]="simpleForm" (submit)="onSubmit()">
+        <div class="modal-header">
+            <h4 class="modal-title">
+              <span class="btn btn-primary btn-lg" style="font-size: 15px !important;font-weight: bolder;">PROMOÇÃO Nº</span> 
+              <span class="btn btn-primary btn-lg" style="font-size: 20px !important; font-weight: bolder;">{{this.infoData?.id}}</span> 
+              - VALIDAR PROMOÇÃO
+            </h4>
+          <button
+            class="close"
+            #closeModal
+            type="reset"
+            (click)="onReset()"
+            data-dismiss="modal"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="padding: 2rem">
+          <app-loading [show]="this.promocaoService.loading"></app-loading>
+          <div class="row">
+            
+            <div class="col-md-12">
+
+              <div class="row" style="padding: 10px; background: #e8ebee;">
+                <div class="col-sm-3 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"> {{ this.infoData?.id || "0000" }}</h5>
+                    <span class="description-text">PROMOÇÃO Nº</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <div class="col-sm-2 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header"> {{ this.infoData?.nome||"----------" }}</h5>
+                    <span class="description-text">PROMOÇÃO</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                  <div class="col-sm-2 border-right">
+                    <div class="description-block">
+                      <h5 class="description-header"> {{ this.infoData?.promocaoTipo?.nome || "---" }}</h5>
+                      <span class="description-text">TIPO PROMOÇÃO</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3">
+                    <div class="description-block border-right">
+                      <h5 class="description-header">{{ this.infoData?.tipoCliente?.nome || "---" }}</h5>
+                      <span class="description-text">TIPO CLIENTE</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <!-- /.col -->
+                  <div class="col-sm-2">
+                      <div class="description-block">
+                        <h5 class="description-header">{{ this.infoData?.estado?.slug || "---" }}</h5>
+                        <span class="description-text">ESTADO</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col --> 
+                
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <hr />
+
+              <div class="form-group has-warning">
+                <label class="col-form-label">Descrição</label>
+                <textarea
+                  maxlength="200"
+                  formControlName="descricao"
+                  placeholder="Escreve uma descricao"
+                  class="form-control"
+                  autofocus
+                  autocomplete="given-name"
+                  style="height: 123px"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.descricao.errors,
+                    'is-valid': f.descricao.touched && !f.descricao.errors
+                  }"
+                ></textarea>
+                <div
+                  *ngIf="submitted && f['descricao'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['descricao'].errors.required">
+                    O campo Observação é obrigatório
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            class="btn btn-danger btn-sm"
+            type="reset"
+            [disabled]="simpleForm.pristine && !submitted"
+            (click)="onReset()"
+          >
+            Limpar
+          </button>
+          <button
+            class="btn btn-success btn-sm mr-1"
+            type="submit"
+            [disabled]="simpleForm.valid"
+          >
+            Validar
+          </button>
+          <button
+            class="btn btn-primary mr-1 btn-sm"
+            type="submit"
+            [disabled]="
+              simpleForm.pristine || simpleForm.invalid
+            "
+            data-style="expand-left"
+          >
+            <i class="fa fa-save"></i> Registar
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

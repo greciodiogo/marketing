@@ -1,0 +1,17 @@
+/* ::ng-deep .mat-select-panel {
+    position: absolute !important;
+    transform: translateY(0) !important;
+  } */
+
+  /* Estilo para o select */
+.custom-select {
+    width: 200px; /* largura do select */
+    padding: 15px 8px 0; /* espaçamento interno */
+    font-size: 16px; /* tamanho da fonte */ 
+    border-radius: 0 !important;
+    border: 0 !important;
+    appearance: none; /* remove a aparência padrão do select (dependendo do navegador) */
+    -webkit-appearance: none; /* remove a aparência padrão do select no Safari */
+    -moz-appearance: none; /* remove a aparência padrão do select no Firefox */
+  }
+   

@@ -1,0 +1,169 @@
+<div bsModal #childModal="bs-modal" class="{{ (is_modal? 'modal fade' :'') }} animate__animated animate__bounceIn"
+  tabindex="-1" role="dialog" aria-labelledby="dialog-child-name" data-backdrop="static" id="modalDetalheNormalize">
+  <div class="modal-dialog modal-lg" style="max-width: 2000px">
+
+    <div class="modal-content {{ ( !is_modal? 'modal-content-notboxshadow' :'') }}"
+      [ngStyle]="(is_modal?'' :{'background':(is_modal?'#fff':'transparent'), 'border':'0'})">
+
+      <div class="modal-header" *ngIf="is_modal">
+        <div class="card-tools">
+
+        </div><br>
+        <h4 class="modal-title"> 
+          <!-- {{title}} - {{ detalheInfo?.nome }}   -->
+
+          <span class="btn btn-primary btn-lg" style="font-size: 15px !important;font-weight: bolder;">PROMOÇÃO Nº</span> 
+          <span class="btn btn-primary btn-lg" style="font-size: 20px !important; font-weight: bolder;">{{this.detalheInfo?.id}}</span> 
+          - VER PRODUTOS ASSOCIADOS
+
+
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="onReset()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="row">
+          <div class="col-md-7">
+            <div class="row">
+              <mat-form-field appearance="outline" class="example-full-width
+                col-md-2 col-xs-2 col-sm-2">
+                <mat-label>Entrada</mat-label>
+                <mat-select name="perPage" [(ngModel)]="this.pagination.perPage">
+                  <mat-option [value]="5">5</mat-option>
+                  <mat-option [value]="10">10</mat-option>
+                  <mat-option [value]="25">25</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="example-full-width
+                col-md-7 col-xs-2 col-sm-2">
+                <mat-label>Pesquisar</mat-label>
+                <input matInput [(ngModel)]="this.filter.search" placeholder='Pesquisar...'>
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+
+              <div class="col-md-1 col-xs-2 col-sm-2">
+                <div class="form-group">
+                  <div class="example-button-row">
+                    <button type="button" (click)="this.getPageFilterData($event)" mat-raised-button
+                      class="btn btn-info btn-flatt filter-color" type="button" style="margin-top: 3px;padding: 4px 16px;"><i
+                        class="fa fa-search"></i>
+                      Filtrar</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="margin float-right">
+              <div class="btn-group">
+                <button type="button" class="btn btn-blockk btn-outline-primary btn-lg"
+                  (click)="this.findAllNormilzeDetalheId(null)">
+                  <i class="icon-refresh"></i> Recarregar Dados
+                </button>
+
+                <button
+                  *ngIf="conta.estado == 1 && conta?.tipoFacturacao == 'PRE-PAGO' && this.canActivateRouterLink('adicionar-servico')"
+                  type="button" class="btn btn-blockk btn-outline-success btn-lg" title="Adicionar Serviço"
+                  data-toggle="modal" data-target="#modalServicoadicionarnumeros">
+                  <i class="fa fa-plus"></i> Adicionar Novos Serviços
+                </button>
+
+                <button
+                  *ngIf="conta.estado == 1 && conta?.tipoFacturacao == 'POS-PAGO' && this.canActivateRouterLink('adicionar-servico')"
+                  type="button" class="btn btn-blockk btn-outline-success btn-lg" title="Adicionar Serviço"
+                  data-toggle="modal" data-target="#modalServicoadicionarnumerospos">
+                  <i class="fa fa-plus"></i> Adicionar Novos Serviços
+                </button>
+              </div>
+
+             
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="modal-body">
+        <app-loading [show]="this.promocaoProdutoService.loading"></app-loading>
+        <table class="table table-hover table-bordered table-striped text-center cabecTableColor2">
+          <tbody>
+            <tr>
+              <th>Produto</th>
+              <th>Valor Promocional</th>
+              <th>Estado</th>
+              <th>Registado Por</th>
+              <th>Data Registo</th>
+              <th>Data actualização</th>
+              <!-- <th width="150px">Operações</th> -->
+            </tr>
+
+            <tr *ngIf="(!detalhes || detalhes.length < 1)">
+              <td colspan="8"> <br><i class="fa fa-clone" style="font-size:128px;color:rgb(199, 199, 199)"></i><br><br>
+                Nenhum Registo Encontrado</td>
+            </tr>
+            <tr *ngFor="let item of detalhes | paginate: { itemsPerPage:
+              this.pagination.perPage, currentPage: this.pagination.page,
+              id: 'listservicos',totalItems: this.pagination.total }; index
+              as i">
+              <td>{{item?.produto?.nome}}/seg</td>
+              <td>{{ configService.numberFormat(item?.promocao_preco) }} Kz</td>
+              <td>
+                <span>
+                    <span class="btn bg-danger btn-block btn-flatt"
+                        *ngIf="item?.status == 0">Inactivo</span>
+                    <span class="btn bg-success btn-block btn-flatt"
+                        *ngIf="item?.status ==1">Activo</span>                                              
+                </span>
+              </td>
+              <td>{{item?.user?.name}}</td>             
+              <td>
+                {{item?.created_at | date: 'dd-MM-yyyy' }}
+              </td>
+              <td>
+                {{item?.updated_at | date: 'dd-MM-yyyy'}}
+              </td>
+
+              <!-- <td>
+                <div class="btn-group btn-block">
+                  <button type="button" class="btn btn-info  btn-flat btn-sm" data-toggle="dropdown">Opções</button>
+                  <button type="button" class="btn btn-info btn-flat dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Menu Serviços</span>
+                  </button>
+                  <div class="dropdown-menu" role="menu" x-placement="bottom-start">
+
+                    <a href="javascript:void(0)"
+                      *ngIf="this.canActivateRouterLink('consultar-saldo-carteira-numero-servicos')"
+                      (click)="this.Carteira.setServico(servico)" data-toggle="modal" data-target="#modalSaldoCarteira"
+                      class="dropdown-item btn-sm"><i class="fa fa-server"></i>Consultar Saldo Carteira Número</a>
+
+    
+                  </div>
+                </div>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer clearfix">
+        <div class="row" style="width: 100%;">
+          <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info">Mostrando de
+              {{this.pagination.page}} a
+              {{this.pagination.perPage}} de
+              {{(this.pagination.total)}} registo{{ ( this.pagination.total
+              > 1? 's':'')}}
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="pull-right">
+              <pagination-controls (pageChange)="getPageFilterData($event)" previousLabel="Anterior" maxSize="6"
+                nextLabel="Próximo" directionLinks="true" responsive="true" id='listservicos'></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

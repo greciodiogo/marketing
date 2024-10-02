@@ -1,0 +1,223 @@
+.main-header, .btn-info {
+  background-color: #02507C !important;
+}
+.nav-sidebar > .nav-item .nav-icon, .sidebar-dark-info .nav-sidebar>
+.nav-item>.nav-link.active, .sidebar-light-info .nav-sidebar>.nav-item>.nav-link.active, .user-panel, .table > thead,
+.sidebar-dark-info .nav-treeview>.nav-item>.nav-link.active, .sidebar-dark-info .nav-treeview>.nav-item>.nav-link.active:hover
+{
+  background-color: #02507C !important;
+}
+
+.sidebar-dark-info .nav-treeview>.nav-item>.nav-link:hover {
+  color: #fff;
+  background: #02507C;
+}
+
+.nav-sidebar>.nav-item .nav-icon {
+  border: 1px solid #02507C;
+}
+
+.sidebar-dark-info .nav-sidebar > .nav-item.menu-open > .nav-link,
+.sidebar-dark-info .nav-sidebar > .nav-item:hover > .nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus
+, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover
+{
+  color: #fff;
+  background-color: #036DA8 !important;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background-color: #02507C
+}
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+  background: #02507C
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: #02507C
+}
+
+
+.layout-fixed .main-sidebar {
+  border-right: 1px solid #036DA8;
+}
+
+.main-footer {
+  width: 100%;
+  bottom: 0;
+  padding: 28px;
+  background: url(/assets/img/logo_at_unig_itgest.png) #02507C 50% 31% no-repeat padding-box !important;
+  background-size: 9% !important;
+}
+
+.filter-color{
+  color: #fff !important;
+}
+
+.filter-color-search:hover{
+  color: #fff;
+  background-color: #02507C;
+}
+
+.filter-color-button{
+  color: #fff !important;
+  background-color: #02507C;
+  border: 1px solid #02507C;
+}
+
+.filter-color-button:hover {
+  color: #fff;
+  background-color: #02507C;
+  border-color: #02507C;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled{
+  color: #fff !important;
+}
+.subtitleColor > h4{
+  background: #f2f4f6;
+  color: #036DA8;
+  border: 1px solid #02507C;
+  margin-bottom: 0px;
+}
+
+.bgDarkSection {
+  background-color: #343a40!important;
+}
+
+.cabecTableColor > thead > tr > th{
+  color: #fff !important;
+  background-color: #02507C !important;
+}
+
+.cabecTableSecundaryColor{
+  color: #fff !important;
+  background-color: #036DA8 !important;
+}
+
+.cabecTableColor2 > tbody > tr > th{
+  color: #fff !important;
+  background-color: #02507C !important;
+}
+
+.cabecTableColor4 > tr{
+  color: #fff !important;
+  background-color: #02507C !important;
+}
+
+.cabecTableColor3 > th{
+  color: #fff !important;
+  background-color: #02507C !important;
+}
+
+.colorTabSection{
+  background-color: #02507C !important;
+  color: #fff !important;
+}
+
+.colorTabSectionSecundary{
+  background-color: #7e7979 !important;
+  color: #fff !important;
+}
+
+.subtitleColor2{
+  background: #eeeeee;
+  color: #000000;
+  padding: 9px 22px;
+  border: 1px solid #02507C;
+  border-radius: 4px;
+}
+
+.subtitleColor3{
+  background: #02507C;
+  color: #fff;
+  padding: 9px 22px;
+  border: 1px solid #02507C;
+  border-radius: 4px;
+}
+
+.borderDiv > h4{
+  background: #eee;
+  padding: 12px 9px;
+  border: 1px solid #02507C !important;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.infoAmbiente > h1{
+  padding: 20px;
+  background: #fff;
+  text-align: center;
+  font-size: 71px;
+  margin-bottom: 40px;
+  color: #02507C;
+}
+
+.labelInfo{
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid #02507C !important;
+}
+
+.infoSaldo > h3{
+  background: #eee; 
+  padding: 22px; 
+  border: 1px solid #02507C;  
+  border-radius:4px;
+}
+/*
+ * Cor do button radius
+ */
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #02507C !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  background-color: #02507C !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple{
+  background-color: #02507C !important;
+}
+
+h4.label {
+  color: #fff;
+  background-color: #02507c !important;
+}
+
+.text-color{
+  color: #02507C;
+}
+
+.boxDiv{
+  color: #fff; 
+  border-radius: 5px;
+  background-color: #02507c !important;
+  padding: 8px;
+}
+
+.dividerLine{
+  border-left: 2px solid #02507c;
+}
+
+.reportingResumeTable{
+  color: #fff;
+  background-color: #02507c !important;
+  padding: 10px;
+}
+
+.borderColorResumeReporting{
+  color: #02507c !important; 
+  font-size: 40px
+}
+
+.table-header{
+  background-color: #036DA8 !important;
+}
+
+/*icon color from comentary*/
+.bg-red {
+  background-color: #02507c!important;
+}

@@ -1,0 +1,73 @@
+ <div class="{{ (is_modal? 'modal fade' :'') }}" id="modalRegistarBanco" data-backdrop="static">
+    <div class="modal-dialog modal-lg " style="max-width: 55%;">
+        <div class="modal-content {{ ( !is_modal? 'modal-content-notboxshadow' :'') }}">
+        <!-- Modal Header -->
+        <form [formGroup]="simpleFormCharge" (submit)="onSubmit();">
+          <div class="modal-header">
+            <h4 class="modal-title">Processar Facturação</h4>
+            <!-- <button class="close" type="reset" (click)="onReset()" data-dismiss="modal">&times;</button> -->
+          </div>
+  
+          <!-- Modal body -->
+          <div class="modal-body" style="padding: 2rem;"> 
+            <app-loading [show]="chargeService.loading"></app-loading> 
+            <div class="row">     
+                <div class="col-md-3">
+                    <div class="form-group has-warning">
+                      <label class="col-form-label" for="ano"> Serie</label>
+                      <div class="input-group mb-3">
+                        <select formControlName="serie_id" class="form-control" > 
+                          <option [value]="null" selected>Selecione a serie</option>   
+                          <option [value]="serie.id" *ngFor="let serie of series">{{ serie.nome }} - {{ serie.documento.nome }}</option> 
+                        </select> 
+                      </div>
+                    </div>
+                  </div>
+
+              <div class="col-md-3">
+                <div class="form-group has-warning">
+                  <label class="col-form-label" for="ano"> Ano</label>
+                  <div class="input-group mb-3">
+                    <select formControlName="ano" class="form-control" >
+                      <option [value]="null">Selecione o ano</option>
+                      <option value="1">ano</option>
+                      <option value="{{ n }}" *ngFor="let n of anos">{{ n }}</option>
+                    </select> 
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-3">
+                <div class="form-group has-warning">
+                  <label class="col-form-label" for="mes"> Mês</label>
+                  <div class="input-group mb-3">
+                    <select formControlName="mes" class="form-control" required autofocus
+                      [ngClass]="{ 'is-invalid': submitted && f.mes.errors, 'is-valid': f.mes.touched && !f.mes.errors }">
+                      <option [value]="null">Selecione o mês</option>
+                      <option value="1">mes</option>
+                      <option value="{{ n.numero }}" *ngFor="let n of meses">{{ n.nome }}</option>
+                    </select>
+                    <div *ngIf="submitted && f['mes'].errors" class="invalid-feedback">
+                      <div *ngIf="f['mes'].errors.required">O campo Estado é obrigatório</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-2 col-xs-2 col-sm-2">
+                <div class="form-group">
+                    <div class="example-button-row">
+                    <button type="button" mat-raised-button class="btn btn-info btn-flat" type="button" style="margin-top: 33px;padding: 5px 26px;"
+                    type="submit"  [disabled]="simpleFormCharge.pristine || simpleFormCharge.invalid" data-style="expand-left"
+                    ><i
+                        class="icon-refresh"></i> Processar</button>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+              </div>  
+            </div>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>

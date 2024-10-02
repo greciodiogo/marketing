@@ -1,0 +1,259 @@
+<div class="row">
+
+  <div class="col-md-12 col-12">
+      <div class="modall modal-info fadee" data-backdrop="static">
+          <div class="modal-dialog" style="max-width: 100%;margin-top:0">
+              <div class="modal-content" style="box-shadow: 0 0 0rem rgba(0,0,0,.5);">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title"> Filtro de Dados</h4>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                      <div class="row">
+                          <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                              <mat-label>Entrada</mat-label>
+                              <mat-select name="perPage" [(ngModel)]="this.pagination.perPage">
+                                  <mat-option [value]="5">5</mat-option>
+                                  <mat-option [value]="10">10</mat-option>
+                                  <mat-option [value]="25">25</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                              <mat-label>Filtro</mat-label>
+                              <mat-select name="type_filter" [(ngModel)]="this.filter.typeFilter">
+                                  <mat-option value="" selected>Filtro</mat-option>
+                                  <mat-option value="created_at">Data</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+
+                          <!-- <mat-form-field appearance="outline" class="example-full-width col-md-1 col-xs-2 col-sm-2">
+                              <mat-label>Estado</mat-label>
+                              <mat-select name="type_filter" [(ngModel)]="this.estado">
+                                  <mat-option value="" selected>Todos</mat-option>
+                                  <mat-option [value]="0">Pendente</mat-option>
+                                  <mat-option [value]="1">Invertido</mat-option>
+                                  <mat-option [value]="2">Rejeitado</mat-option>
+                              </mat-select>
+                          </mat-form-field> -->
+
+                          <mat-form-field appearance="outline" class="example-full-width col-md-3 col-xs-2 col-sm-2">
+                              <mat-label>Pesquisar</mat-label>
+                              <input matInput [(ngModel)]="this.filter.search" placeholder='Pesquisar...'>
+                              <mat-icon matSuffix>search</mat-icon>
+                          </mat-form-field>
+
+                          <div class="col-md-1 col-xs-2 col-sm-2">
+                              <mat-radio-group aria-label="Select an option" [(ngModel)]="this.filter.typeOrderBy">
+                                  <mat-radio-button value="ASC"> Crescente</mat-radio-button><br>
+                                  <mat-radio-button value="DESC"> Decrescente</mat-radio-button>
+                              </mat-radio-group>
+                          </div>
+
+                          <div class="col-md-1 col-xs-2 col-sm-2">
+                              <div class="form-group">
+                                  <div class="example-button-row">
+                                      <button type="button" (click)="listarPromocao()" mat-raised-button
+                                          class="btn btn-info btn-lg filter-color" type="button"
+                                          style="margin-top: 3px;padding: 4px 16px;"><i class="fa fa-search"></i>
+                                          Filtrar</button>
+                                  </div>
+                                  <!-- /.input group -->
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-lg-12 col-12">
+      <div class="modall modal-info fadee" data-backdrop="static">
+          <div class="modal-dialog" style="max-width: 100%;">
+              <div class="modal-content" style="box-shadow: 0 0 0rem rgba(0,0,0,.5);">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title">TABELA DE PROMOÇÕES</h4>
+
+                      <div class="card-tools">
+                          <button class="btn btn-outline-primary btn-lg btn-flatt" type="button"
+                              (click)="listarPromocao()"><i class="icon-refresh"></i> Recarregar Dados</button>
+                            <button *ngIf="!this.promocaoService.canActivateRouterLink('registar-promocao')"
+                              class="btn btn-outline-success btn-lg" type="button" data-toggle="modal"
+                              data-target="#modalPromocaoCreateOrEdit" (click)="
+                              this.PromocaoFormCreateOrEditComponent.getTipoClientes();
+                              this.PromocaoFormCreateOrEditComponent.resetarTodosCheckBoxes();
+                              this.PromocaoFormCreateOrEditComponent.getTipoPromocao();
+                              this.PromocaoFormCreateOrEditComponent.editarConfPromocao(null, 'Registar');
+
+                              ">
+                              <i class="icon-plus"></i> Criar Promoção
+                            </button>
+                      </div>
+
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                      <!-- /.card-body -->
+                      <div class="table-responsivee">
+
+
+                          <app-loading [show]="promocaoService.loading"></app-loading>
+                          <!-- <app-loading [show]="a4FacturaService"></app-loading> -->
+
+                          <table
+                              class="table table-hover table-bordered table-stripedd text-center m-0 exportAsXLSXCliente cabecTableColor2">
+                              <tbody>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>Promoção Nº</th>
+                                      <th>Nome</th>
+                                      <th>Tipo de Promoção</th>
+                                      <th>Tipo de Cliente</th>
+                                      <th>Início da Promoção </th>
+                                      <th>Fim da Promoção</th>
+                                      <th>Registado Por</th>
+                                      <th style="width: 7%;">Estado</th>
+                                      <th style="width: 7%;">Data Registo</th>
+
+                                      <th style="width: 7%;">Acção</th>
+                                  </tr>
+                                  <tr
+                                      *ngFor="let item of promocoes | paginate: { itemsPerPage: this.pagination.perPage, currentPage: this.pagination.page, id: 'listPromocao',totalItems: this.pagination.total }; index as i">
+                                      <td>{{(i+1)}}</td>
+                                      <td>{{item?.id}}</td>
+                                      <td>{{item?.nome}}</td>
+                                      <td>{{item?.promocaoTipo?.nome}}</td>
+                                      <td>{{item?.tipoCliente?.nome}}</td>
+                                      <td style="background: #17a2b861;">{{(item?.data_inicio | date: 'dd-MM-yyyy') ||'-------'}}</td>
+                                      <td style="background: #17a2b861;">{{item?.data_fim | date: 'dd-MM-yyyy' ||'-------'}}</td>
+                                      <td>{{item?.user?.name}}</td>
+                                      <td [style.background-color]="item?.estado?.cor">
+                                        <span class="btn btn-block btn-flat" style="color: #fff;">{{item?.estado?.slug}} </span>
+                                      </td>
+                                    
+                                      <td>{{item?.created_at | date: 'dd-MM-yyyy' ||'-------'}}</td>
+
+
+                                      <td>
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info btn-flatt btn-lg"
+                                                data-toggle="dropdown">Opções</button>
+                                            <button type="button" class="btn btn-info btn-flatt btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: -58px; transform: translate3d(67px,
+                                                38px, 0px);">
+
+
+                                                    <a *ngIf="item?.estado?.slug=='PENDENTE'"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm"
+                                                    data-toggle="tooltip" data-widget="chat-pane-toggle"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDescricaoAlterarEstadoPromocao"
+                                                    title="Aprovar Promoção" (click)="this.alterarEstadoPromocaoCreateOrEditComponent.setLoadData(item, 'APROVADO')"> <i class="fa fa-check"></i> Aprovar
+                                                    </a>
+
+                                                    <a *ngIf="item?.estado?.slug=='PENDENTE'"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm"
+                                                    data-toggle="tooltip" data-widget="chat-pane-toggle"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDescricaoAlterarEstadoPromocao"
+                                                    title="Rejeitar Promoção" (click)="this.alterarEstadoPromocaoCreateOrEditComponent.setLoadData(item, 'REJEITADO')"> <i class="fa fa-times"></i> Rejeitar
+                                                    </a>
+
+
+                                                    <a *ngIf="item?.estado?.slug=='APROVADO'"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm"
+                                                    data-toggle="tooltip" data-widget="chat-pane-toggle"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDescricaoAlterarEstadoPromocao"
+                                                    title="Rejeitar Promoção" (click)="this.alterarEstadoPromocaoCreateOrEditComponent.setLoadData(item, 'ANULADO')"> <i class="fa fa-ban"></i> Anular
+                                                    </a>
+
+                                                    <a *ngIf="item?.estado?.slug=='APROVADO'"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm"
+                                                    data-toggle="tooltip" data-widget="chat-pane-toggle"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDescricaoAlterarEstadoPromocao"
+                                                    title="Rejeitar Promoção" (click)="this.alterarEstadoPromocaoCreateOrEditComponent.setLoadData(item, 'EM_ANDAMENTO')"> <i class="fa fa-paper-plane"></i> Em Andamento
+                                                    </a>
+
+
+                                                    <a *ngIf="item?.estado?.slug=='EM_ANDAMENTO'"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm"
+                                                    data-toggle="tooltip" data-widget="chat-pane-toggle"
+                                                    data-toggle="modal"
+                                                    data-target="#modalDescricaoAlterarEstadoPromocao"
+                                                    title="Rejeitar Promoção" (click)="this.alterarEstadoPromocaoCreateOrEditComponent.setLoadData(item, 'TERMINADO')"> <i class="fa fa-check"></i> Terminar
+                                                    </a>
+                                           
+                                                    <a *ngIf="!this.promocaoService.canActivateRouterLink('editar-promocao')"
+                                                    href="javascript:void(0)" class="dropdown-item btn-sm" title="Editar"
+                                                    data-widget="chat-pane-toggle" data-toggle="modal" data-target="#modalPromocaoCreateOrEdit"
+                                                    (click)="
+                                                        this.PromocaoFormCreateOrEditComponent.getTipoClientes();
+                                                        this.PromocaoFormCreateOrEditComponent.editarConfPromocao(item, 'Editar');
+                                                        this.PromocaoFormCreateOrEditComponent.getTipoPromocao();
+                                                        "><i
+                                                        class="fa fa-credit-card"></i> Editar</a>
+
+
+                                                    <a href="javascript:void(0)" class="dropdown-item btn-sm" title="Editar"
+                                                    data-widget="chat-pane-toggle" data-toggle="modal" data-target="#modalDetalheNormalize"
+                                                    *ngIf="!this.promocaoService.canActivateRouterLink('detlahe-promocao')"
+                                                    (click)="this.consultarProdutosPromocaoComponent.setProdutoPromocao(item);"><i class="fa fa-search"></i> Consultar Detalhes</a>
+                                                                          
+
+                                              </div>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <div class="row" style="width: 100%;">
+                          <div class="col-sm-12 col-md-5">
+                              <div class="dataTables_info">Mostrando de {{this.pagination.page}} a
+                                  {{this.pagination.perPage}} de
+                                  {{configService.numberFormat(this.pagination.total)}} registo{{ (
+                                  this.pagination.total > 1? 's':'')}}
+                              </div>
+                          </div>
+                          <div class="col-sm-12 col-md-7">
+                              <div class="pull-right">
+                                  <pagination-controls (pageChange)="getPageFilterData($event)"
+                                      previousLabel="Anterior" maxSize="6" nextLabel="Próximo" directionLinks="true"
+                                      responsive="true" id='listPromocao'></pagination-controls>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<app-promocao-form-create-or-edit [is_modal]="true" (loadList)="listarPromocao()" [desconto]="desconto"
+  [produtoGrupos]="this.selectForms.produtoGrupos"></app-promocao-form-create-or-edit>
+
+<app-consultar-produtos-promocao [is_modal]="true" (loadList)="listarPromocao()">
+</app-consultar-produtos-promocao>
+
+<app-descricao-alterar-estado-promocao [is_modal]="true" (loadList)="listarPromocao()">
+</app-descricao-alterar-estado-promocao>
+
+<!-- <app-delete-data (loadList)="getPageFilterData($event)" (fnDelete)="delete(this.trunk.id)" [data]="this.trunk.id"
+  modalName="modalEliminaImposto"></app-delete-data> -->
+

@@ -1,0 +1,128 @@
+<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalAddOrEditSegmentacao" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="max-width: 1422px; right: 0.7% !important; margin-right: 0.7% !important; margin-top: 100px !important; ">
+        <div class="modal-content {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+            <!-- Modal Header -->
+            <form [formGroup]="segmentacaoForm" (ngSubmit)="onSubmit()">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-users nav-icon"></i> {{title}}</h4>
+                    <button class="close" #closeModal type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" style="padding: 2rem;">
+                    <ngx-loading [show]="this.segmentacaoService.loading"></ngx-loading>
+                    <div class="row">
+
+                        <!-- Província -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="provincia"><i class="fa fa-map" aria-hidden="true"></i> Província</label>
+                                <select formControlName="provincia"
+                                    class="form-control">
+                                    <option [ngValue]="null" disabled selected>Selecione a provincia</option>
+                                    <option [value]="provincia.id" *ngFor="let provincia of selectForms.provincias">
+                                        {{ provincia.nome }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Idade Mínima -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="idadeMinima"><i class="fa fa-calendar" aria-hidden="true"></i> Idade
+                                    Mínima</label>
+                                <input type="number" formControlName="idadeMinima" class="form-control"
+                                    placeholder="Idade Mínima">
+                                <div *ngIf="segmentacaoForm.errors?.idadeRangeInvalid" class="text-danger">A idade
+                                    mínima não pode ser maior que a idade máxima</div>
+                            </div>
+                        </div>
+
+                        <!-- Idade Máxima -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="idadeMaxima"><i class="fa fa-calendar" aria-hidden="true"></i> Idade
+                                    Máxima</label>
+                                <input type="number" formControlName="idadeMaxima" class="form-control"
+                                    placeholder="Idade Máxima">
+                                <div *ngIf="segmentacaoForm.errors?.idadeRangeInvalid" class="text-danger">A idade
+                                    mínima não pode ser maior que a idade máxima</div>
+                            </div>
+                        </div>
+
+                        <!-- Gênero -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="genero"><i class="fa fa-venus-mars" aria-hidden="true"></i> Gênero</label>
+                                <select formControlName="genero" class="form-control">
+                                    <option selected [ngValue]="null">Género</option>
+                                    <option [value]="genero.id" *ngFor="let genero of selectForms.generos">
+                                        {{ genero.slug }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Tipo de Cliente -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="tipoCliente"><i class="fa fa-user" aria-hidden="true">
+                                    </i> Tipo de Cliente</label>
+                                <select formControlName="tipoCliente" class="form-control">
+                                    <option [ngValue]="null">Tipo de Cliente</option>
+                                    <option [value]="tipoCliente.id"
+                                        *ngFor="let tipoCliente of selectForms.tipoClientes"> {{ tipoCliente.nome }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Direção -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="direcao"><i class="fa fa-map-marker" aria-hidden="true"></i> Direção</label>
+                                <select formControlName="direcao" class="form-control">
+                                    <option selected [ngValue]="null">Direcção</option>
+                                    <option [value]="direccao.slug" *ngFor="let direccao of this.selectForms.direccaos">
+                                        {{ direccao.designacao }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Valor gasto em compras Mínimo -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="valorMinimo"><i class="fa fa-money" aria-hidden="true"></i> Valor
+                                    Mínimo</label>
+                                <input type="number" formControlName="valorMinimo" class="form-control"
+                                    placeholder="Valor mínimo gasto em compras">
+                                <div *ngIf="segmentacaoForm.errors?.valorRangeInvalid" class="text-danger">O valor
+                                    mínimo não pode ser maior que valor máximo</div>
+                            </div>
+                        </div>
+
+                        <!-- Valor gasto em compras Máximo -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="valorMaximo"><i class="fa fa-money" aria-hidden="true"></i> Valor
+                                    Máximo</label>
+                                <input type="number" formControlName="valorMaximo" class="form-control"
+                                    placeholder="Valor máximo gasto em compras">
+                                <div *ngIf="segmentacaoForm.errors?.valorRangeInvalid" class="text-danger">O valor
+                                    mínimo não pode ser maior que valor máximo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" type="button" [disabled]="!submitted"
+                        (click)="onReset()">Limpar</button>
+                    <button class="btn btn-success btn-sm mr-1" type="submit" [disabled]="!segmentacaoForm.valid">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

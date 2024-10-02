@@ -1,0 +1,169 @@
+<div class="{{ (is_modal? 'modal fade' :'') }}" id="modalCampanhaCreateOrEdit" data-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content {{ (!is_modal ? 'modal-content-notboxshadow' : '') }}">
+            <!-- Modal Header -->
+            <form [formGroup]="campanhaForm" (ngSubmit)="onSubmit()">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-bullhorn nav-icon"></i> {{ title }}</h4>
+                    <button class="close" #close type="button" (click)="onReset()" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body" style="padding: 2rem;">
+                    <ngx-loading [show]="this.campanhaService.loading"></ngx-loading>
+                    <div class="row">
+                        <!-- Nome da Campanha -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nome"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Nome</label>&nbsp;
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <input type="text" formControlName="nome" class="form-control"
+                                    placeholder="Nome da Campanha"
+                                    [ngClass]="{ 'is-invalid': submitted && f.nome.errors, 'is-valid': f.nome.touched && !f.nome.errors }">
+                                <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['nome'].errors.required">O campo Nome é obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- tipo campanha -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tipo_campanha_id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Tipo de Campanha</label>
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <select type="text" formControlName="tipo_campanha_id" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.tipo_campanha_id.errors, 'is-valid': f.tipo_campanha_id.touched && !f.tipo_campanha_id.errors }">
+                                    <option [ngValue]="null">Selecione o tipo</option>
+                                    <option [value]="item?.id" *ngFor="let item of tipocampanhas">{{item?.nome}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f['tipo_campanha_id'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['tipo_campanha_id'].errors.required">O campo tipo campanha é
+                                        obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Datas de Início e Fim -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="data_inicio"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
+                                    Início</label>&nbsp;
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <input type="date" formControlName="data_inicio" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.data_inicio.errors, 'is-valid': f.data_inicio.touched && !f.data_inicio.errors }">
+                                <div *ngIf="submitted && f['data_inicio'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['data_inicio'].errors.required">O campo Data Inicio é obrigatório
+                                    </div>
+                                </div>
+                                <div *ngIf="campanhaForm.errors?.dateRangeInvalid" class="text-danger">A Data de Início
+                                    não pode ser maior que a Data de Fim</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="data_fim"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
+                                    Fim</label>&nbsp;
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <input type="date" formControlName="data_fim" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.data_fim.errors, 'is-valid': f.data_fim.touched && !f.data_fim.errors }">
+                                <div *ngIf="submitted && f['data_fim'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['data_fim'].errors.required">O campo Data Fim é obrigatório</div>
+                                </div>
+                                <div *ngIf="campanhaForm.errors?.dateRangeInvalid" class="text-danger">A Data de Início
+                                    não pode ser maior que a Data de Fim</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="orcamento"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Orçamento</label>
+                                &nbsp;
+                                <label style="color: #f44336" class="mr-2">*</label>
+                                <input type="number" formControlName="orcamento" class="form-control"
+                                    placeholder="Orçamento em (AOA)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.orcamento.errors, 'is-valid': f.orcamento.touched && !f.orcamento.errors }">
+                                <div *ngIf="submitted && f['orcamento'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['orcamento'].errors.required">O campo Orçamento é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="objetivo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Objectivo</label>
+                                <input type="text" formControlName="objectivo" class="form-control"
+                                    placeholder="Objetivo da Campanha"
+                                    [ngClass]="{ 'is-invalid': submitted && f.objectivo.errors, 'is-valid': f.objectivo.touched && !f.objectivo.errors }">
+                                <div *ngIf="submitted && f['objectivo'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['objectivo'].errors.required">O campo Objectivo é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="descricao"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Descrição</label>
+                                <textarea formControlName="descricao" class="form-control" placeholder="Descrição"
+                                    rows="2"
+                                    [ngClass]="{ 'is-invalid': submitted && f.descricao.errors, 'is-valid': f.descricao.touched && !f.descricao.errors }"></textarea>
+                                <div *ngIf="submitted && f['descricao'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['descricao'].errors.required">O campo Descrição é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <!-- Contêiner de Upload de Arquivos -->
+                            <div class="form-group file-upload" (click)="fileInput.click()">
+                                <label for="anexos"><i class="fa fa-paperclip" aria-hidden="true"></i> Anexos</label>
+                                <input #fileInput type="file" id="anexos" (change)="onFileChange($event)" class="form-control-file d-none" multiple>
+                                <small class="form-text text-muted">Clique aqui para anexar imagens ou arquivos PDF.</small>
+                            </div>
+                        
+                            <!-- Pré-visualização dos arquivos -->
+                            <div class="preview-container" *ngIf="filePreviews.length > 0">
+                                <div class="preview-item" *ngFor="let file of filePreviews; let i = index">
+                                    <!-- Botão de remover arquivo -->
+                                    <button type="button" class="btn btn-danger btn-sm remove-btn" (click)="removeFile(i)">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    
+                                    <ng-container *ngIf="file.type.startsWith('image/'); else pdfPreview">
+                                        <img [src]="file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
+                                    </ng-container>
+                                    <ng-template #pdfPreview>
+                                        <div class="pdf-thumbnail">
+                                            <i class="fa fa-file-pdf-o"></i>
+                                            <p>{{ file.name }}</p>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" type="button" [disabled]="campanhaForm.pristine && !submitted"
+                        (click)="onReset()">Limpar</button>
+                    <button class="btn btn-success btn-sm mr-1" type="submit"
+                        [disabled]="!campanhaForm.valid">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

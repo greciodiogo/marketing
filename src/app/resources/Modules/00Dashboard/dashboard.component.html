@@ -1,0 +1,61 @@
+
+<div style="background: white; padding: 10px;height: 60px; border-radius: 6px;border: 1px solid #c2c7d0;">
+  <button class="btn btn-primary btn-lg" style="float: right;"  type="button"
+  (click)="this.getDashboardInit()"><i class="icon-refresh"></i> Recarregar Dados  </button>
+</div>
+
+<hr><br>
+<div class="row">
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Facturação" [boxNumber]="dashboard.facturas" [loading]="this.dash.loading"
+      boxColor="bg-aqua"
+      [boxLink]="{url:'/comercial/facturacao/listar',name:'Nova Facturação', permission:this.canActivateRouterLink('listar-facturas')}"
+      boxIcon="fa fa-file-text"></app-box>
+  </div>
+
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Vendas" [boxNumber]="dashboard.vendas" [loading]="this.dash.loading"
+      boxColor="bg-primary"
+      [boxLink]="{url:'/comercial/vendas/historico',name:'Histórico Vendas', permission:this.canActivateRouterLink('listar-historico-vendas')}"
+      boxIcon="fa fa-shopping-cart"></app-box>
+  </div>
+
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Clientes" [boxNumber]="dashboard.clientes" [loading]="this.dash.loading"
+      boxColor="bg-green"
+      [boxLink]="{url:'/crm/clientes/consultar-clientes',name:'Listagem de Clientes', permission:this.canActivateRouterLink('listar-clientes')}"
+      boxIcon="fa fa-users"></app-box>
+  </div>
+
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Produtos" [boxNumber]="dashboard.produtos" [loading]="this.dash.loading"
+      boxColor="bg-yellow"
+      [boxLink]="{url:'/logistica/produtos/listar',name:'Consultar produtos' , permission:this.canActivateRouterLink('listar-produtos')}"
+      boxIcon="fa fa-bookmark"></app-box>
+  </div>
+
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Serviços" [boxNumber]="dashboard.servicos" [loading]="this.dash.loading"
+      boxColor="bg-yellow"
+      [boxLink]="{url:'/logistica/produtos/listar',name:'Consultar serviços' , permission:this.canActivateRouterLink('listar-produtos')}"
+      boxIcon="fa fa-folder"></app-box>
+  </div>
+
+  <div class="col-lg-2 col-xs-6">
+    <app-box boxText="Recibos" [boxNumber]="dashboard.recibos" [loading]="this.dash.loading"
+      boxColor="bg-red"
+      [boxLink]="{url:'/comercial/cobrancas/recebimentos/consultar',name:'Consultar Recibos', permission:this.canActivateRouterLink('listar-recibos')}"
+      boxIcon="fa fa-address-card"></app-box>
+  </div>
+
+</div>
+<br>
+<hr>
+<h4 style="font-size: 15.5rem;
+  margin: 0 auto;
+  margin-top: 60px;
+  color: rgb(52 58 64 / 2%);
+  text-align: center;
+  text-shadow: 0 1px 1px rgb(0 0 0 / 1%), 0 1px 3px rgb(0 0 0 / 1%);
+  font-weight: 600;"><i>Unig4</i> Telco
+</h4>

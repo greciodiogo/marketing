@@ -1,0 +1,146 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-40 sidebar-dark-info">
+  <!-- Brand Logo -->
+  <a routerLink="/dashboard" class="brand-link">
+    <img src="../../../../assets/img/{{ logotipo }}" alt="AdminLTE Logo" class="brand-imagee img-circlee elevation-3e"
+      style="opacity: 0.8; width: 104px" />
+    <span class="brand-text font-weight-lightf" style="color: black"><b></b></span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel d-flex">
+      <div class="image">
+        <img src="../../../../assets/img/avatar5.png" class="img-circlee elevation-2e" alt="User Image" />
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{ this.authenticated.user.name }}</a>
+      </div>
+    </div>
+
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+        data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview">
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Página Principal</p>
+          </a>
+        </li>
+
+        <!-- MARKETING -->
+        <li class="nav-item has-treeview" routerLinkActive="menu-open"
+        >
+        <a href="#" class="nav-link" routerLinkActive="active">
+          <i class="fa fa-bullhorn nav-icon"></i>
+          <p>Marketing<i class="right fas fa-angle-left"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item has-treeview" routerLinkActive="menu-open"
+           >
+            <a routerLink="/marketing/campanhas/listar" routerLinkActive="active" class="nav-link">
+              <i class="fa fa-bullhorn nav-icon"></i>
+              <p>
+                Gestão de Campanhas
+              </p>
+            </a>
+          </li>
+
+
+
+                  
+        <li class="nav-item has-treeview"
+        routerLinkActive="menu-open">
+        <a href="javascript:void(0)" class="nav-link"><i class="far fa-folder nav-icon"></i>
+          <p>Promoção<i class="right fa fa-angle-left"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+
+          <li class="nav-item" class="nav-item has-treeview"
+          routerLinkActive="menu-open">
+          <a routerLink="/marketing/promocao/listar" routerLinkActive="active" class="nav-link">
+            <i class="fa fa-bullhorn nav-icon"></i>
+            <p>Consultar Promoção</p>
+          </a>
+        </li>
+
+        <li class="nav-item has-treeview" routerLinkActive="menu-open">
+              <a href="#" class="nav-link">
+                <i class="fa fa-cogs nav-icon"></i>
+                <p>
+                  Configs Promoção
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">        
+                <li class="nav-item">
+                  <a routerLink="/marketing/promocao/configs/tipo-promocao/listar" routerLinkActive="active"
+                    class="nav-link">
+                    <i class="fa fa-cog nav-icon"></i>
+                    <p>Tipo de Promoção</p>
+                  </a>
+                </li>
+            
+        
+              </ul>
+            </li>
+
+        
+        </ul>
+      </li>
+
+
+        </ul>
+        <!-- <li class="nav-item has-treeview" routerLinkActive="menu-open"
+        *ngIf="!this.canActivateRouterLink('modulo-promocao')">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-folder"></i>
+          <p>Promoção<i class="right fas fa-angle-left"></i></p>
+        </a>
+          <ul class="nav nav-treeview">
+            <li *ngIf="!this.canActivateRouterLink('listar-promocao')" class="nav-item" class="nav-item has-treeview"
+              routerLinkActive="menu-open">
+              <a routerLink="/marketing/promocao/listar" routerLinkActive="active" class="nav-link">
+                <i class="fa fa-bullhorn nav-icon"></i>
+                <p>Consultar Promoção</p>
+              </a>
+            </li>
+
+            <li class="nav-item has-treeview" routerLinkActive="menu-open"
+                  *ngIf="!this.canActivateRouterLink('configs-promocao')">
+                  <a href="#" class="nav-link">
+                    <i class="fa fa-cogs nav-icon"></i>
+                    <p>
+                      Configs Promoção
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">        
+                    <li class="nav-item" *ngIf="
+                        !this.canActivateRouterLink('listar-config-tipo-promocao')
+                      ">
+                      <a routerLink="/marketing/promocao/configs/tipo-promocao/listar" routerLinkActive="active"
+                        class="nav-link">
+                        <i class="fa fa-cog nav-icon"></i>
+                        <p>Tipo de Promoção</p>
+                      </a>
+                    </li>
+                
+            
+                  </ul>
+                </li>
+          </ul>
+      </li> -->
+      <!-- END MARKETING -->
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
