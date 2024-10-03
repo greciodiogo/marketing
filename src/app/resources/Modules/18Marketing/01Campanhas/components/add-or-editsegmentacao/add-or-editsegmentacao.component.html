@@ -12,16 +12,19 @@
                 <div class="modal-body" style="padding: 2rem;">
                     <ngx-loading [show]="this.segmentacaoService.loading"></ngx-loading>
                     <div class="row">
-                        <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-                            <mat-chip class="mat-chip-item" *ngFor="let criterio of selectForms.segmentacoes" selected>
+                        <div class="mat-chip-list-stacked ">
+                            <button class="mat-chip-item" *ngFor="let criterio of selectForms.segmentacoes"
+                            (click)="toggleOpcao(criterio.slug)"
+                            [ngClass]="{'selecte':this.opcoesSelecionadas[criterio.slug]}"
+                            >
                               {{criterio.nome}}
-                            </mat-chip>
-                          </mat-chip-list>
+                            </button>
+                          </div>
                     </div>
                     <div class="row">
 
                         <!-- Província -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.GEO">
                             <div class="form-group">
                                 <label for="provincia"><i class="fa fa-map" aria-hidden="true"></i> Província</label>
                                 <select formControlName="provincia"
@@ -35,7 +38,7 @@
                         </div>
 
                         <!-- Idade Mínima -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.IDADE">
                             <div class="form-group">
                                 <label for="idadeMinima"><i class="fa fa-calendar" aria-hidden="true"></i> Idade
                                     Mínima</label>
@@ -47,7 +50,7 @@
                         </div>
 
                         <!-- Idade Máxima -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.IDADE">
                             <div class="form-group">
                                 <label for="idadeMaxima"><i class="fa fa-calendar" aria-hidden="true"></i> Idade
                                     Máxima</label>
@@ -59,7 +62,7 @@
                         </div>
 
                         <!-- Gênero -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.GENERO">
                             <div class="form-group">
                                 <label for="genero"><i class="fa fa-venus-mars" aria-hidden="true"></i> Gênero</label>
                                 <select formControlName="genero" class="form-control">
@@ -72,7 +75,7 @@
                         </div>
 
                         <!-- Tipo de Cliente -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.TPC">
                             <div class="form-group">
                                 <label for="tipoCliente"><i class="fa fa-user" aria-hidden="true">
                                     </i> Tipo de Cliente</label>
@@ -85,7 +88,7 @@
                             </div>
                         </div>
                         <!-- Direção -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.DR">
                             <div class="form-group">
                                 <label for="direcao"><i class="fa fa-map-marker" aria-hidden="true"></i> Direção</label>
                                 <select formControlName="direcao" class="form-control">
@@ -98,7 +101,7 @@
                         </div>
 
                         <!-- Valor gasto em compras Mínimo -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.HISTORY">
                             <div class="form-group">
                                 <label for="valorMinimo"><i class="fa fa-money" aria-hidden="true"></i> Valor
                                     Mínimo</label>
@@ -110,7 +113,7 @@
                         </div>
 
                         <!-- Valor gasto em compras Máximo -->
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="opcoesSelecionadas.HISTORY">
                             <div class="form-group">
                                 <label for="valorMaximo"><i class="fa fa-money" aria-hidden="true"></i> Valor
                                     Máximo</label>
@@ -120,6 +123,13 @@
                                     mínimo não pode ser maior que valor máximo</div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Texto exibido quando nenhuma segmentação está selecionada -->
+                        <h2 *ngIf="!isAnyOptionSelected()" class="no-selection-message">
+                            Sem segmentações selecionadas
+                        </h2>
                     </div>
                 </div>
 

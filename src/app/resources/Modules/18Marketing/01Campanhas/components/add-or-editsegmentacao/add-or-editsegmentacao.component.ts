@@ -42,6 +42,29 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
   public observableObj: Observable<any>;
   public subjectObj = new Subject<number>();
 
+    opcoesSelecionadas = {
+      GEO: false,
+      IDADE: false,
+      GENERO: false,
+      HISTORY: false,
+      DR: false,
+      TPC: false,
+      SERVICE: false,
+      FACTURACAO: false,
+      tecnologia: false,
+      tarifario: false
+    };
+  
+    // Alterna a seleção de uma opção
+    toggleOpcao(opcao: string) {
+      this.opcoesSelecionadas[opcao] = !this.opcoesSelecionadas[opcao];
+    }
+
+        // Método para verificar se alguma opção está selecionada
+    isAnyOptionSelected(): boolean {
+      return Object.values(this.opcoesSelecionadas).some(value => value);
+    }
+
 
   public selectForms = {
     generos: [],
@@ -143,6 +166,8 @@ export class AddOrEditsegmentacaoComponent implements OnInit {
 
   public setData(item: any) {
     this.campanha = item
+    console.log(item);
+    
   }
 
 

@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-mat-chip-list::ng-deep .mat-chip-list-wrapper{
+.mat-chip-list-stacked{
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
     gap: 10px !important;
@@ -13,9 +13,19 @@ mat-chip-list::ng-deep .mat-chip-list-wrapper{
 
 .mat-chip-item{
     border-radius: 8px;
-    padding: 25px;
+    padding: 12px;
     font-size: 23px !important;
     background-color: transparent !important;
     border: 1px solid #02507C !important;
     color: #02507C !important;
 }
+
+.mat-chip-item.selecte {
+    background-color: #02507C !important; /* Cor de fundo ao ser selecionado */
+    color: #fff !important; /* Cor do texto ao ser selecionado */
+    border: 1px solid #02507C !important; /* Borda ao ser selecionado */
+  }
+  
+  .mat-chip-item:hover {
+    background-color: #d1e3f7; /* Cor de fundo ao passar o mouse*/ 
+  }
