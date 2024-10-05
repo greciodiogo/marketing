@@ -20,6 +20,7 @@ import { CampanhaTipoCreateOrEditComponent } from './configs/campanha-tipo/campa
 import { VisualizarCampanhaComponent } from './components/visualizar-campanha/visualizar-campanha.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { TruncatePipe } from './pipe/truncate'; // ajuste o caminho conforme necessário
+import { FilesModule } from '@app/shared/components/files/files.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TruncatePipe } from './pipe/truncate'; // ajuste o caminho conforme nec
     CampanhaTipoListarComponent,
     CampanhaTipoCreateOrEditComponent,
     VisualizarCampanhaComponent,
-    TruncatePipe
+    TruncatePipe,
+    FilesModule
   ],
   imports: [
     CommonModule,

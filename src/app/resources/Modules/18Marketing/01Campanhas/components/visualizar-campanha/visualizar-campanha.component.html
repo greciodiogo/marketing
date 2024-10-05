@@ -10,9 +10,9 @@ class="responsive-modal"
                         <button *ngIf="campanha?.estadoInfo?.slug=='PENDENTE' || campanha?.estadoInfo?.slug=='REJEITADO' && this.campanhaService.canActivateRouterLink('marketing-validar-campanha')"                                        
                             class="btn btn-outline-primary btn-lg"
                             data-toggle="tooltip" data-toggle="modal"
-                            data-target="#modalValidarCampanhaCreateOrEdit"
+                            data-target="#myModalOpenApp"
                             title="Validar Campanha" (click)="setCampanha(item)">
-                            <i class="fa fa-check"></i> Validar Campanha
+                E            <i class="fa fa-check"></i> Validar Campanha
                          </button>
 
                         <a href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
@@ -223,3 +223,5 @@ class="responsive-modal"
 <app-regras-automacao [is_modal]="true" (loadList)="getCampanhaOnDb()" ></app-regras-automacao>
 
 <app-add-or-editsegmentacao [is_modal]="true" (loadList)="getCampanhaOnDb()"></app-add-or-editsegmentacao>
+
+<!-- <app-open-file (loadList)="null"></app-open-file> -->
