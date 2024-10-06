@@ -37,8 +37,7 @@ import { FilesModule } from '@app/shared/components/files/files.module';
     CampanhaTipoListarComponent,
     CampanhaTipoCreateOrEditComponent,
     VisualizarCampanhaComponent,
-    TruncatePipe,
-    FilesModule
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -48,6 +47,7 @@ import { FilesModule } from '@app/shared/components/files/files.module';
     ModalModule.forRoot(),
     BoxModule,
     CampanhasRoutingModule,
+    FilesModule
   ],
 })
 export class CampanhasModule {}
