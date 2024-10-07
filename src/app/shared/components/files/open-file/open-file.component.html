@@ -1,3 +1,4 @@
+
 <div class="modal fade bd-example-modal-lg" id="myModalOpenApp" tabindex="-1" role="dialog"
 aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-xl" style="max-width: 2185px;">
@@ -10,7 +11,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" da
   <app-loading [show]="this.anexosService.loading" title="Aguarde" subTitle="Estamos processar a leitura do anexo"></app-loading>
 
   <div class="modal-body" style="background: #33333370;">
-    <div class="row">
+    <!-- <div class="row">
         <div class="doc-menu" style="padding: 15px 10px;  background: #ecf0f5;">
             <div class="margin">
               <div class="btn-group">
@@ -19,13 +20,6 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" da
               <div class="btn-group">
                 <button type="button" [disabled]="true"  class="btn btn-outline-secondary btn-lg"><i class="fa fa-link"></i> Copiar ligação</button>
               </div>
-              <!-- <div class="btn-group">
-                <button type="button" [disabled]="disabled.transferir" class="btn btn-outline-secondary btn-lg" (click)="readAnexoPreview()">
-                  <i class="fa fa-download" *ngIf="!this.anexosService.loading"></i>
-                  <i class="fa fa-circle-o-notch fa-spin" *ngIf="this.anexosService.loading" style="font-size: 20px;"></i>
-                  Transferir
-                </button>
-              </div> -->
               <div class="btn-group">
                 <button type="button" [disabled]="true"  class="btn btn-outline-secondary btn-lg"><i class="fa fa-copy"></i> Copiar para</button>
               </div>
@@ -48,7 +42,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" da
           </div>
            <hr>
        
-    </div>
+    </div> -->
     </div>
     <div class="modal-body" style="height: 903px;">
     <iframe class="embed-responsive-item" id="pdf_preview2" type="application/pdf" width="100%" height="100%"
