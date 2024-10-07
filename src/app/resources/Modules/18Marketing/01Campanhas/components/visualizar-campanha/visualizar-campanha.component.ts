@@ -311,5 +311,7 @@ export class VisualizarCampanhaComponent implements OnInit {
     }
   }
 
+  filePreviews: { url: string; name: string; type: string }[] = [];
+
 
  }
