@@ -58,7 +58,7 @@ export class AddOrEditCampanhaComponent implements OnInit {
       data_fim: ['', Validators.required],
       tipo_campanha_id: [null, Validators.required],
       is_gratuita: [null],
-      files: [null],
+      files: [''],
     },
       { validators: dateRangeValidator() }
     );
@@ -88,8 +88,7 @@ export class AddOrEditCampanhaComponent implements OnInit {
   }
 
   createOrEdit(formulario: FormGroup, isCreate: boolean = true, id) {
-    this.campanhaForm.patchValue({ is_gratuita: 0, files: this.selectedFiles })
-    console.log(formulario.value)
+    this.campanhaForm.patchValue({ is_gratuita: 0 });
     this.campanhaService
       .storeOrUpdate(formulario.value, id)
       .pipe(first())
@@ -100,7 +99,6 @@ export class AddOrEditCampanhaComponent implements OnInit {
           if (isCreate) {
             this.onReset()
           }
-          this.uploadFiles()
           this.loadList.emit(Object(response).data);
         },
         (error) => {
@@ -145,7 +143,7 @@ export class AddOrEditCampanhaComponent implements OnInit {
     });
   }
 
-  filePreviews: { url: string; name: string; type: string }[] = [];
+  filePreviews: { file: { path: string; filename: string; base64: any, type: string }}[] = [];
   selectedFiles: File[] = [];
   // Função para gerenciar a seleção de arquivos
   onFileChange(event: Event): void {
@@ -154,13 +152,18 @@ export class AddOrEditCampanhaComponent implements OnInit {
       Array.from(input.files).forEach((file) => {
         const reader = new FileReader();
         reader.onload = (e: any) => {
+          const fileConvertedToBase64Path = e?.target?.result;
           this.filePreviews.push({
-            url: e.target.result,
-            name: file.name,
+            file: {
+            path: e?.target?.result,
+            base64: fileConvertedToBase64Path,
+            filename: file.name,
             type: file.type,
-          });
+        }});
+          console.log(this.filePreviews)
+          this.selectedFiles.push(file);
+          this.campanhaForm.patchValue({files: this.filePreviews})
         };
-        this.selectedFiles.push(file);
         reader.readAsDataURL(file);
       });
 
@@ -181,19 +184,6 @@ export class AddOrEditCampanhaComponent implements OnInit {
     this.selectedFiles = []; // Limpar os arquivos selecionados
     for(let i=0;i<this.filePreviews.length;i++){
       this.removeFile(i)
-    }
-  }
-
-  async uploadFiles() {
-    try {
-      this.campanhaService.loading = true;
-      // Aguarda a resposta da função uploadFiles
-      await this.campanhaService.uploadFiles(this.selectedFiles);
-    } catch (error) {
-      console.error('Erro ao enviar arquivos:', error);
-    } finally {
-      this.campanhaService.loading = false;
-      await this.clearFileInput()
     }
   }
 
