@@ -396,8 +396,8 @@ legend.fieldset-border {
 }
 
 .table td, .table th {
-  padding: 8px 10px 5px;
-  font-size: 15px;
+  font-size: 20px !important;
+  padding: 22px 15px !important;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
@@ -1484,9 +1484,7 @@ label:not(.form-check-label):not(.custom-file-label) {
   color: rgb(0 0 0 / 57%);
   font-size: 15px !important;
 }
-.table th {
-  font-size: 17px;
-}
+
 
 
 .mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
