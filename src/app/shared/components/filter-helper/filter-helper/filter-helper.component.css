@@ -1,0 +1,116 @@
+label, mat-label
+select, input{
+    font-size: 17px !important;
+}
+
+.filter_main_container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter_top{
+    flex: 1;
+}
+
+.filter_bottom{
+
+}
+
+  .apoio-cliente{
+    position: fixed;
+    right: 40px;
+    bottom: 120px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 4px 18px rgba(43, 43, 61,.1);
+    background-color: #02507C;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+  }
+  
+  .apoio-cliente img:hover {
+    transform: scale(1.1);
+    margin-bottom: 10px;
+  }
+  
+  .apoio-cliente img {
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+  }
+  
+  .message-helper {
+    position: relative;
+  }
+  
+  .message-helper p {
+    display: none;
+    position: fixed;
+    bottom: 240px;
+    right: 0px;
+    width: 250px;
+    color: #02507C;
+    /* color: white; */
+    /* padding: 10px ; */
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  
+  .apoio-cliente:hover .message-helper p{
+    display: flex;
+  }
+  
+  @media (min-width: 1600px) {
+  
+      .apoio-cliente{
+          width: 110px;
+          height: 110px;
+      }
+      
+    .apoio-cliente img {
+      width: 50%;
+      height: 50%;
+    }
+  
+    .message-helper p {
+      bottom: 270px;
+      font-size: 24px;
+      width: 300px;
+    } 
+  
+  }
+  
+  .faq-helper{
+    position: relative;
+    transition: 300ms linear ease-in-out;
+    background-color: transparent;
+    border: transparent;
+  }
+  
+  .faq-helper:hover .message-helper p{
+    display: flex;
+  }
+  
+  @media (max-width:870px) {
+    .apoio-cliente{
+      bottom: 80px;
+      height: 80px;
+      width: 80px;
+    }
+  
+    .message-helper p {
+      bottom: 170px;
+    }
+  }
+
+  button {
+    padding: 16px;
+    font-size: 16px;
+  }
+

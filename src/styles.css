@@ -396,8 +396,8 @@ legend.fieldset-border {
 }
 
 .table td, .table th {
-  font-size: 20px !important;
-  padding: 22px 15px !important;
+  font-size: 18px !important;
+  padding: 20px 15px !important;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
 }

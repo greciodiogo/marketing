@@ -21,6 +21,7 @@ import { MgxCircularProgressBarModule,
   MgxCircularProgressFullBarModule,
   MgxCircularProgressPieModule } from'mgx-circular-progress-bar';
 import { AsideRightModule } from './components/aside-right/aside-right.module';
+import { FilterHelperModule } from './components/filter-helper/filter-helper.module';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,6 +41,7 @@ import { AsideRightModule } from './components/aside-right/aside-right.module';
     ModalModule.forRoot(),
     NotificationsModule,
     TableModule,
+    FilterHelperModule,
     NgbTooltipModule,
     MgxCircularProgressBarModule,
   MgxCircularProgressFullBarModule,
@@ -61,6 +63,7 @@ import { AsideRightModule } from './components/aside-right/aside-right.module';
     InputAutocompleteClienteModule,
     ButtonFileUploadModule,
     TableModule,
+    FilterHelperModule,
     NgbTooltipModule,
     MgxCircularProgressBarModule,
   MgxCircularProgressFullBarModule,
