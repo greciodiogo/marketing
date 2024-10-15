@@ -210,3 +210,5 @@
 
 <view-campanha [is_modal]="true" (loadList)="getCampanhas()" (close)="setCampanha(null)"
     [campanha]="campanha"></view-campanha>
+
+<app-filter-helper (loadList)="this.setPageFilterData($event)"></app-filter-helper>

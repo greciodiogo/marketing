@@ -112,6 +112,11 @@ export class ListarCampanhaComponent implements OnInit {
     this.getCampanhas()
   }
 
+  public setPageFilterData(page: number) {
+    this.pagination.perPage = page;
+    this.getCampanhas();
+  }
+
   setCampanha(campanha: any) {
     this.campanha = campanha
   }
