@@ -1,0 +1,65 @@
+
+
+<button class="faq-helper" (click)="handleFilterClick()">
+
+    <div class="message-helper">
+
+    </div>
+    <a routerLink="/faqs" routerLinkActive="active" class="apoio-cliente">
+  
+      <img src="/assets/img/filter-icon.png" width="60px" height="60px" alt="">
+    </a>
+  </button>
+
+<app-aside-right [componentSize]="'short'" [isOpen]="isFilterActived" (close)="onCloseFilterHelper()"
+componentTitle="Filtro de Dados"
+>
+    <div class="filter_main_container">
+        <div class="filter_top">
+            <div class="col-md-12">
+            <fieldset class="fieldset-border">
+                <legend class="fieldset-border"><strong> Nº Registo</strong></legend>
+                <div class="row">
+                <mat-form-field appearance="outline" class="example-full-width col-md-12 col-xs-12 col-sm-12">
+                    <mat-label>Entrada</mat-label>
+                    <select matNativeControl class="selectInput" name="perPage" [(ngModel)]="this.pagination.perPage">
+                    <option [value]="5">5</option>
+                    <option [value]="10">10</option>
+                    <option [value]="25">25</option>
+                    </select>
+                </mat-form-field>
+                <div class="col-md-12 col-xs-2 col-sm-3">
+                    <mat-radio-group aria-label="Select an option" class="row" [(ngModel)]="this.filter.typeOrderBy">
+                    <mat-label class="p-1">Filtrar Por</mat-label>
+                    <br><br>
+                    <mat-radio-button value="ASC" class="mr-4"> Crescente</mat-radio-button><br />
+                    <mat-radio-button value="DESC"> Decrescente</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                </div>
+            </fieldset>
+            </div>
+
+
+            <div style="overflow-y: auto; height: 100vh;">
+                <ng-content></ng-content> 
+            </div>
+
+        </div>
+        <div class="col-md-12 filter_bottom" >
+           <div class="row">
+            <div class="col-md-12 col-xs-2 col-sm-2">
+                <div class="form-group">
+                <div class="example-button-row">
+                    <button type="button" (click)="this.getPageFilterData()" mat-raised-button
+                    class="btn btn-info filter-color" type="button" style="margin-top: 3px; padding: 12px 16px; width: 100%">
+                    <i class="fa fa-search"></i> Filtrar
+                    </button>
+                </div>
+                <!-- /.input group -->
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</app-aside-right>
