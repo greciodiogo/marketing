@@ -98,17 +98,18 @@ app-aside-right::ng-deep aside.active .container-aside {
 .preview-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 40px;
     margin-top: 15px;
 }
 
 .preview-item {
     position: relative;
-    width: 100px;
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 10pz
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .remove-btn {

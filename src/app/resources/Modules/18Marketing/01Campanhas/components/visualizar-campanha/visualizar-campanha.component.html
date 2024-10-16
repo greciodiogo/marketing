@@ -209,12 +209,12 @@ class="responsive-modal"
                         </fieldset>
                     </div>
                     
-                    <fieldset class="fieldset-border" *ngIf="campanha?.anexos !=null">
+                    <fieldset class="fieldset-border" *ngIf="campanha?.anexos.length > 0">
                         <legend class="fieldset-border"><strong> Documentos Associados a Campanha</strong></legend>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="preview-container" *ngIf="campanha?.anexos.length > 0">
-                                    <div class="preview-item" *ngFor="let file of campanha?.anexos; let i = index">
+                                    <a class="preview-item" *ngFor="let file of campanha?.anexos; let i = index" (click)="this.OpenFile.readAnexoPreview(file?.filename , file?.formato, file?.estado,file?.motivoanexo);">
                                         
                                         <ng-container *ngIf="file.formato.startsWith('image/'); else pdfPreview">
                                             <img [src]="file.path" class="img-thumbnail" alt="Pré-visualização da imagem">
@@ -222,10 +222,10 @@ class="responsive-modal"
                                         <ng-template #pdfPreview>
                                             <div class="pdf-thumbnail">
                                                 <i class="fa fa-file-pdf-o"></i>
-                                                <p>{{ file.filename }}</p>
                                             </div>
+                                            <p>{{ convertTitle(file.filename) }}</p>
                                         </ng-template>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

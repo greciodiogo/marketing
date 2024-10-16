@@ -139,13 +139,13 @@
                                         <i class="fa fa-times"></i>
                                     </button>
                                     
-                                    <ng-container *ngIf="file.type.startsWith('image/'); else pdfPreview">
-                                        <img [src]="file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
+                                    <ng-container *ngIf="file.file.type.startsWith('image/'); else pdfPreview">
+                                        <img [src]="file.file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
                                     </ng-container>
                                     <ng-template #pdfPreview>
                                         <div class="pdf-thumbnail">
                                             <i class="fa fa-file-pdf-o"></i>
-                                            <p>{{ file.name }}</p>
+                                            <p>{{ file.file.name }}</p>
                                         </div>
                                     </ng-template>
                                 </div>
