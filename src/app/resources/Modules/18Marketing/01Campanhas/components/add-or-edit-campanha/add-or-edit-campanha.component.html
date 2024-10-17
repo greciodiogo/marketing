@@ -113,13 +113,15 @@
                             <div class="form-group">
                                 <!-- <label for="descricao"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Descrição</label> -->
-                                <textarea formControlName="descricao" class="form-control" placeholder="Descrição"
+                                <!-- <textarea formControlName="descricao" class="form-control" placeholder="Descrição"
                                     rows="2"
-                                    [ngClass]="{ 'is-invalid': submitted && f.descricao.errors, 'is-valid': f.descricao.touched && !f.descricao.errors }"></textarea>
-                                <div *ngIf="submitted && f['descricao'].errors" class="invalid-feedback">
-                                    <div *ngIf="f['descricao'].errors.required">O campo Descrição é obrigatório
-                                    </div>
-                                </div>
+                                    [ngClass]="{ 'is-invalid': submitted && f.descricao.errors, 'is-valid': f.descricao.touched && !f.descricao.errors }"></textarea> -->
+                                    <!-- <app-text-editor></app-text-editor> -->
+                                    <!-- <div *ngIf="submitted && f['descricao'].errors" class="invalid-feedback"> -->
+                                    <!-- <div *ngIf="f['descricao'].errors.required">O campo Descrição é obrigatório
+                                    </div> -->
+                                <!-- </div> -->
+                                 <app-text-editor formControlName="descricao"></app-text-editor>
                             </div>
                         </div>
 
@@ -140,13 +142,13 @@
                                     </button>
                                     
                                     <ng-container *ngIf="file.file.type.startsWith('image/'); else pdfPreview">
-                                        <img [src]="file.file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
+                                        <img [src]="file.file.path" class="img-thumbnail" style="max-width: 60px;" alt="Pré-visualização da imagem">
                                     </ng-container>
                                     <ng-template #pdfPreview>
                                         <div class="pdf-thumbnail">
                                             <i class="fa fa-file-pdf-o"></i>
-                                            <p>{{ file.file.name }}</p>
                                         </div>
+                                        <p>{{ file.file.filename }}</p>
                                     </ng-template>
                                 </div>
                             </div>

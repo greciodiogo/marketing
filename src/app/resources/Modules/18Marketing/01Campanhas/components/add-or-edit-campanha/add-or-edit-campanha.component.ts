@@ -160,7 +160,6 @@ export class AddOrEditCampanhaComponent implements OnInit {
             filename: file.name,
             type: file.type,
         }});
-          console.log(this.filePreviews)
           this.selectedFiles.push(file);
           this.campanhaForm.patchValue({files: this.filePreviews})
         };
