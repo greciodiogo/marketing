@@ -19,6 +19,7 @@ import { RegrasAutomacaoComponent } from '../regras-automacao/regras-automacao.c
 import { CanaisDistribuicaoComponent } from '../canais-distribuicao/canais-distribuicao.component';
 import { AddOrEditsegmentacaoComponent } from './../add-or-editsegmentacao/add-or-editsegmentacao.component';
 import Swal from 'sweetalert2';
+import { OpenFileComponent } from '@app/shared/components/files/open-file/open-file.component';
 @Component({
   selector: 'view-campanha',
   templateUrl: './visualizar-campanha.component.html',
@@ -60,6 +61,10 @@ export class VisualizarCampanhaComponent implements OnInit {
 
   @ViewChild(AddOrEditsegmentacaoComponent, { static: true })
   public addOrEditsegmentacaoComponent: AddOrEditsegmentacaoComponent;
+
+  @ViewChild(OpenFileComponent, { static: true })
+  public OpenFile: OpenFileComponent;
+
   
   constructor(
     public campanhaService: CampanhaService,
@@ -313,5 +318,13 @@ export class VisualizarCampanhaComponent implements OnInit {
 
   filePreviews: { url: string; name: string; type: string }[] = [];
 
+  convertTitle(data: string) {
+    const regex = /(?:file_[\w\d]+_)+\d+_\d+_(\d+_)+([\w]+)/g;
+    let match;
+  
+    while ((match = regex.exec(data)) !== null) {
+      return match[2]; // Imprime cada título diretamente
+    }
+  }
 
  }

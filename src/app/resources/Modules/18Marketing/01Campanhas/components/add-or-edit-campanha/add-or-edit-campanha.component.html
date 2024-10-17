@@ -15,9 +15,9 @@
                         <!-- Nome da Campanha -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nome"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <!-- <label for="nome"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Nome</label>&nbsp;
-                                <label style="color: #f44336" class="mr-2">*</label>
+                                <label style="color: #f44336" class="mr-2">*</label> -->
                                 <input type="text" formControlName="nome" class="form-control"
                                     placeholder="Nome da Campanha"
                                     [ngClass]="{ 'is-invalid': submitted && f.nome.errors, 'is-valid': f.nome.touched && !f.nome.errors }">
@@ -30,9 +30,9 @@
                         <!-- tipo campanha -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="tipo_campanha_id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <!-- <label for="tipo_campanha_id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Tipo de Campanha</label>
-                                <label style="color: #f44336" class="mr-2">*</label>
+                                <label style="color: #f44336" class="mr-2">*</label> -->
                                 <select type="text" formControlName="tipo_campanha_id" class="form-control"
                                     [ngClass]="{ 'is-invalid': submitted && f.tipo_campanha_id.errors, 'is-valid': f.tipo_campanha_id.touched && !f.tipo_campanha_id.errors }">
                                     <option [ngValue]="null">Selecione o tipo</option>
@@ -49,9 +49,9 @@
                         <!-- Datas de Início e Fim -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="data_inicio"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
+                                <!-- <label for="data_inicio"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
                                     Início</label>&nbsp;
-                                <label style="color: #f44336" class="mr-2">*</label>
+                                <label style="color: #f44336" class="mr-2">*</label> -->
                                 <input type="date" formControlName="data_inicio" class="form-control"
                                     [ngClass]="{ 'is-invalid': submitted && f.data_inicio.errors, 'is-valid': f.data_inicio.touched && !f.data_inicio.errors }">
                                 <div *ngIf="submitted && f['data_inicio'].errors" class="invalid-feedback">
@@ -65,9 +65,9 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="data_fim"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
+                                <!-- <label for="data_fim"><i class="fa fa-calendar" aria-hidden="true"></i> Data de
                                     Fim</label>&nbsp;
-                                <label style="color: #f44336" class="mr-2">*</label>
+                                <label style="color: #f44336" class="mr-2">*</label> -->
                                 <input type="date" formControlName="data_fim" class="form-control"
                                     [ngClass]="{ 'is-invalid': submitted && f.data_fim.errors, 'is-valid': f.data_fim.touched && !f.data_fim.errors }">
                                 <div *ngIf="submitted && f['data_fim'].errors" class="invalid-feedback">
@@ -81,10 +81,10 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <label for="orcamento"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <!-- <label for="orcamento"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     Orçamento</label>
                                 &nbsp;
-                                <label style="color: #f44336" class="mr-2">*</label>
+                                <label style="color: #f44336" class="mr-2">*</label> -->
                                 <input type="number" formControlName="orcamento" class="form-control"
                                     placeholder="Orçamento em (AOA)"
                                     [ngClass]="{ 'is-invalid': submitted && f.orcamento.errors, 'is-valid': f.orcamento.touched && !f.orcamento.errors }">
@@ -97,8 +97,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="objetivo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    Objectivo</label>
+                                <!-- <label for="objetivo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Objectivo</label> -->
                                 <input type="text" formControlName="objectivo" class="form-control"
                                     placeholder="Objetivo da Campanha"
                                     [ngClass]="{ 'is-invalid': submitted && f.objectivo.errors, 'is-valid': f.objectivo.touched && !f.objectivo.errors }">
@@ -111,8 +111,8 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="descricao"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    Descrição</label>
+                                <!-- <label for="descricao"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    Descrição</label> -->
                                 <textarea formControlName="descricao" class="form-control" placeholder="Descrição"
                                     rows="2"
                                     [ngClass]="{ 'is-invalid': submitted && f.descricao.errors, 'is-valid': f.descricao.touched && !f.descricao.errors }"></textarea>
@@ -139,13 +139,13 @@
                                         <i class="fa fa-times"></i>
                                     </button>
                                     
-                                    <ng-container *ngIf="file.type.startsWith('image/'); else pdfPreview">
-                                        <img [src]="file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
+                                    <ng-container *ngIf="file.file.type.startsWith('image/'); else pdfPreview">
+                                        <img [src]="file.file.url" class="img-thumbnail" alt="Pré-visualização da imagem">
                                     </ng-container>
                                     <ng-template #pdfPreview>
                                         <div class="pdf-thumbnail">
                                             <i class="fa fa-file-pdf-o"></i>
-                                            <p>{{ file.name }}</p>
+                                            <p>{{ file.file.name }}</p>
                                         </div>
                                     </ng-template>
                                 </div>
