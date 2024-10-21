@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AnexosService } from '@app/resources/Modules/09Anexos/services/anexos.service';
 import { TransacaobancariaService } from '@app/resources/Modules/11Financas/services/transacaobancaria.service';
 import { AdiantamentoSolicitacaoService } from '@app/resources/Modules/01CRM/services/adiantamento-solicitacao.service';
@@ -18,7 +18,7 @@ export class OpenFileComponent implements OnInit {
   @Output() private loadList = new EventEmitter<any>();
   @ViewChild('closeModal') closeModal: ElementRef;
   @ViewChild(FileRejeitarComponent, { static: true }) public fileRejeitar: FileRejeitarComponent;
-
+  @Input() showHeader: boolean = true;
   public tipoOperacao = {
     tipoMovimento: null,
     movimentoId: null,
