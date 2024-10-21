@@ -88,4 +88,6 @@
     margin-top: 5px;
 }
 
-
+.editor_container {
+    zoom: 125%;
+}

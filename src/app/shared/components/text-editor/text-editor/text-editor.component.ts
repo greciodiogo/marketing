@@ -12,9 +12,9 @@ export class TextEditorComponent{
   editorConfig: AngularEditorConfig = {
     editable: true,
       spellcheck: true,
-      height: '50',
+      height: '70',
       minHeight: '40',
-      maxHeight: '50',
+      maxHeight: '70',
       width: 'auto',
       minWidth: '0',
       translate: 'yes',
