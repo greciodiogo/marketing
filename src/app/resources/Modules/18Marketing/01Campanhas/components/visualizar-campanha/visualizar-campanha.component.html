@@ -7,12 +7,12 @@ class="responsive-modal"
                     <div class="selfcare_sidebar">
                          <div class="nav nav-pills" style="margin-bottom: 40px;">
 
-                        <button *ngIf="campanha?.estadoInfo?.slug=='PENDENTE' || campanha?.estadoInfo?.slug=='REJEITADO' && this.campanhaService.canActivateRouterLink('marketing-validar-campanha')"                                        
+                            <button *ngIf="campanha?.estadoInfo?.slug=='PENDENTE' || campanha?.estadoInfo?.slug=='REJEITADO' && this.campanhaService.canActivateRouterLink('marketing-validar-campanha')"                                        
                             class="btn btn-outline-primary btn-lg"
                             data-toggle="tooltip" data-toggle="modal"
-                            data-target="#myModalOpenApp"
+                            data-target="#modalValidarCampanhaCreateOrEdit"
                             title="Validar Campanha" (click)="setCampanha(item)">
-                E            <i class="fa fa-check"></i> Validar Campanha
+                            <i class="fa fa-check"></i> Validar Campanha
                          </button>
 
                         <a href="javascript:void(0)" class="btn btn-outline-primary btn-lg"
