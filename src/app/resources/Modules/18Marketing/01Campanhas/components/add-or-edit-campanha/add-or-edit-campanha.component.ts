@@ -51,7 +51,7 @@ export class AddOrEditCampanhaComponent implements OnInit {
     this.campanhaForm = this.fb.group({
       id: [{ value: null, disabled: true }],
       nome: ['', Validators.required],
-      descricao: ['', Validators.required],
+      descricao: [''],
       objectivo: [''],
       orcamento: ['', [Validators.required, Validators.min(0)]],
       data_inicio: ['', Validators.required],
@@ -143,7 +143,7 @@ export class AddOrEditCampanhaComponent implements OnInit {
     });
   }
 
-  filePreviews: { file: { path: string; filename: string; base64: any, type: string }}[] = [];
+  filePreviews: { file: { path: string; filename: string; base64: any, type: string }, type: number}[] = [];
   selectedFiles: File[] = [];
   // Função para gerenciar a seleção de arquivos
   onFileChange(event: Event): void {
@@ -159,7 +159,9 @@ export class AddOrEditCampanhaComponent implements OnInit {
             base64: fileConvertedToBase64Path,
             filename: file.name,
             type: file.type,
-        }});
+        },
+        type: 16
+      });
           this.selectedFiles.push(file);
           this.campanhaForm.patchValue({files: this.filePreviews})
         };
